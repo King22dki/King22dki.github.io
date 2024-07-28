@@ -1,5 +1,6 @@
 # Daniel King
 ## Welcome
+![Welcome Banner](https://via.placeholder.com/1200x300.png?text=Welcome+to+Daniel+King's+Website)
 Welcome to my personal website! Here you'll find my research, ideas, blogs, and more about my digital identity. Feel free to explore and get in touch!
 
 ---
