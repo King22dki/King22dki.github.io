@@ -15,7 +15,7 @@ Welcome to my personal website! Here you'll find my research, ideas, blogs, and 
 ---
 
 ## About Me
-Hi, I'm Daniel King. I am passionate about [your field/interest]. I use this space to share my work and thoughts. Connect with me on [LinkedIn](https://www.linkedin.com) or follow me on [Twitter](https://twitter.com).
+Hi, I'm Daniel King. I am an autodidact. I use this space to share my work and thoughts. Connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/) or follow me on [Twitter](https://twitter.com).
 
 ---
 
@@ -82,7 +82,7 @@ Hi, I'm Daniel King. I am passionate about [your field/interest]. I use this spa
 ---
 
 ## Contact
-Feel free to reach out to me via email at [daniel.king@example.com](mailto:daniel.king@example.com) or connect with me on [LinkedIn](https://www.linkedin.com).
+Feel free to reach out to me via email at [daniel.king@example.com](mailto:daniel.king@example.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/).
 
 ---
 
