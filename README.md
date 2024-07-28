@@ -15,7 +15,8 @@ Welcome to my personal website! Here you'll find my research, ideas, blogs, and 
 ---
 
 ## About Me
-Hi, I'm Daniel King. I am an autodidact. I use this space to share my work and thoughts. Connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/) or follow me on [Twitter](https://twitter.com).
+
+Hi, I'm Daniel King. I am a highly skilled and adaptable autodidact with a background in Advanced Chemical Engineering and a passion for leveraging data-driven solutions to drive innovation. My experience has equipped me with a strong analytical mindset and advanced problem-solving skills, which I apply to my work in research and teaching. I enjoy exploring the intersections of maths, chemistry, neuroscience, and philosophy, and I spend my free time reading, writing, and attending seminars on these topics. This website is a space to share my work, thoughts, and ongoing projects. Feel free to reach out if you'd like to connect! Connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/) or follow me on [Twitter](https://twitter.com).
 
 ---
 
