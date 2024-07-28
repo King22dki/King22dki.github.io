@@ -1,6 +1,6 @@
 # Daniel King
 ## Welcome
-![Welcome Banner](Queryous.html)
+![Welcome Banner](Queryous.png)
 Welcome to my personal website! Here you'll find my research, ideas, blogs, and more about my digital identity. Feel free to explore and get in touch!
 
 ---
