@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel King - Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        nav {
+            background-color: #34495e;
+            padding: 10px;
+            border-radius: 5px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #2c3e50;
+            border-radius: 3px;
+        }
+        .section {
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .project, .experience-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        .project:hover, .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #contact-form {
+            display: grid;
+            gap: 10px;
+        }
+        #contact-form input, #contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        #contact-form button {
+            width: auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        #contact-form button:hover {
+            background-color: #2980b9;
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #3498db;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid #3498db;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #3498db;
+        }
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid #3498db;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #3498db transparent transparent;
+        }
+        .right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .skill-bars {
+            width: 100%;
+            padding: 20px 0;
+        }
+        .skill-bar {
+            margin-bottom: 20px;
+        }
+        .skill-bar-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .skill-bar-progress {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background-color: #3498db;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Daniel King</h1>
+        <nav>
+            <a href="#about"><i class="fas fa-user"></i> About</a>
+            <a href="#qualifications"><i class="fas fa-graduation-cap"></i> Qualifications</a>
+            <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+            <a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="#skills"><i class="fas fa-cogs"></i> Skills</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p> Hi, I'm Daniel King. I am a highly skilled and adaptable autodidact with a background in Chemical Engineering.I enjoy exploring the exploring and dveloping in many different areas of study like: maths, chemistry, neuroscience, and philosophy, and I spend my free time reading, writing, and attending seminars on these topics. This website is a space to share my work, thoughts, and ongoing projects. Feel free to reach out if you'd like to connect!.</p>
+        </section>   
+
+        <section id="experience" class="section">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Research Scientist (prior - Data Scientist)</h3>
+                        <p>Mar 2024 – Present</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Chemistry & Physics Technician (Engineering Mathematics Lecturer)</h3>
+                        <p>Dec 2023 – Present</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Graduate Research Assistant</h3>
+                        <p>July 2019 – Dec 2019</p>
+                        <ul>
+                            <li>Conducted research on air pollution dispersion modelling in inner-city London using Star CCM+</li>
+                            <li>Investigated the use of deep learning techniques for adaptive meshing in air pollution dispersion mapping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>Projects and Reports</h2>
+            <div class="project">
+                <h3>Tech Vision Report on Generative AI</h3>
+            </div>
+            <div class="project">
+            <div class="project">
+                <h3>Development of Group Contribution Models for Furanic Compounds (MSc Thesis)</h3>
+                <p>Utilised the Statistical Associating Fluid Theory (SAFT) Equation of State (EoS) to develop group contribution models for furanic compounds. Created large databases to describe the physics of the furanic compounds, using XML and JSON for parameter storage. Employed Python scripts to model fluid phase equilibria, utilising libraries such as Matplotlib, Pandas, NumPy, and gSAFTmm.</p>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <h3>Technical Skills</h3>
+            <div class="skill-bars">
+                <div class="skill-bar">
+                    <div class="skill-bar-title">Python</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-title">R</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="80%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-title">JavaScript</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="75%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-title">HTML/CSS</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="85%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-title">Data Analysis (Pandas, NumPy)</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-title">Machine Learning (scikit-learn, TensorFlow, PyTorch)</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="80%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-bar-title">SQL</div>
+                    <div class="skill-bar-progress">
+                        <div class="skill-bar-fill" data-width="85%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    
