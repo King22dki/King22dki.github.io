@@ -92,9 +92,9 @@ Feel free to reach out to me via email at [daniel.king@example.com](mailto:danie
 
 ## Follow Me
 
-- [![LinkedIn Icon](linkedin_icon.png)](https://www.linkedin.com/in/daniel-king-igwe/)
-- [![Twitter Icon](https://img.shields.io/badge/Twitter-blue?style=flat-square&logo=twitter&logoColor=white)](https://x.com/king22dki)
-- [![GitHub Icon](https://img.shields.io/badge/GitHub-black?style=flat-square&logo=github&logoColor=white)](https://github.com/King22dki)
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/daniel-king-igwe/)
+- [![X (formerly Twitter)](https://img.shields.io/badge/X-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/king22dki)
+- [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/King22dki)
 ---
 
 Thank you for visiting my website!
