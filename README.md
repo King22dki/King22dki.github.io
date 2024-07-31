@@ -91,6 +91,7 @@ Feel free to reach out to me via email at [daniel.king@example.com](mailto:danie
 ---
 
 ## Follow Me
+<image scr="linkedin_icon.png" width="50" height="50" alt="">
 - ![LinkedIn Icon](linkedin_icon.png) [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/)
 - ![Twitter Icon](https://via.placeholder.com/30.png?text=Twitter) [Twitter](https://x.com/king22dki)
 - ![GitHub Icon](https://via.placeholder.com/30.png?text=GitHub) [GitHub](https://github.com/King22dki)
