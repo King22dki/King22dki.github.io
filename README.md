@@ -7,11 +7,9 @@ Welcome to my personal website! Here you'll find my research, ideas, blogs, and 
 
 ## Table of Contents
 1. [About Me](#about-me)
-2. [Research](#research)
-3. [Ideas](#ideas)
-4. [Blog](#blog)
-5. [Projects](#projects)
-6. [Contact](#contact)
+2. [Blog](#blog)
+3. [Projects](#projects)
+4. [Contact](#contact)
 
 ---
 
@@ -21,33 +19,7 @@ Hi, I'm Daniel King. I am a highly skilled and adaptable autodidact with a backg
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/) or follow me on [Twitter](https://x.com/king22dki).
 
----
 
-## Research
-### Current Research
-- **Title of Research 1**
-  - Brief description or abstract of the research.
-  - [Link to paper or detailed page](#)
-- **Title of Research 2**
-  - Brief description or abstract of the research.
-  - [Link to paper or detailed page](#)
-
-### Past Research
-- **Title of Past Research 1**
-  - Brief description or abstract of the research.
-  - [Link to paper or detailed page](#)
-- **Title of Past Research 2**
-  - Brief description or abstract of the research.
-  - [Link to paper or detailed page](#)
-
----
-
-## Ideas
-### Innovations and Concepts
-- **Idea 1**
-  - Brief description of the idea.
-- **Idea 2**
-  - Brief description of the idea.
 
 ---
 
