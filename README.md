@@ -15,7 +15,7 @@ Welcome to my personal website! Here you'll find my research, ideas, blogs, and 
 
 ## About Me
 
-Hi, I'm Daniel King. I am a highly skilled and adaptable autodidact with a background in Chemical Engineering. In my day-to-day life, I am an engineering lecturer. I enjoy exploring and developing in many different areas of study like maths, chemistry, neuroscience, and philosophy, and I spend my free time reading, writing, and attending seminars on these topics. I also co-founded a company called Queryous with some friends, which you can learn more about [here](https://queryous.ai/). This website is a space to share my work, thoughts, and ongoing projects. Feel free to reach out if you'd like to connect!
+Hi, I'm Daniel King, an autodidact with a background in Chemical Engineering. By day, I work as an engineering lecturer, and in my free time, I dive into a wide range of subjects, including mathematics, chemistry, neuroscience, physics, and philosophy. My explorations have led me into the field of probability theory, where I work with higher-dimensional spaces and their interactions to better understand artificial intelligence. I'm continuously exploring new areas within these domains, and I enjoy reading, writing, and attending seminars to deepen my knowledge. I also co-founded a company called Queryous with some friends, which you can learn more about [here](https://queryous.ai/). This website is a space to share my work, thoughts, and ongoing projects. Feel free to reach out if you'd like to connect!
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/) or follow me on [Twitter](https://x.com/king22dki).
 
