@@ -39,23 +39,17 @@ Connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/) or 
 ---
 
 ## Projects
+
 ### Current Projects
-- **Project Title 1**
-  - Brief description of the project.
-  - [Link to project page or repository](#)
-- **Project Title 2**
-  - Brief description of the project.
-  - [Link to project page or repository](#)
 
-### Completed Projects
-- **Project Title 3**
-  - Brief description of the project.
-  - [Link to project page or repository](#)
-- **Project Title 4**
-  - Brief description of the project.
-  - [Link to project page or repository](#)
+- **Natural Language Processing Journey**  
+  Exploring concepts in NLP, from fundamentals to advanced techniques.  
+  [View on GitHub](https://github.com/King22dki/natural-language-processing-Journey)
 
----
+- **Maths Codes**  
+  A collection of mathematical codes and algorithms for various applications.  
+  [View on GitHub](https://github.com/King22dki/Maths_Codes)
+
 
 ## Contact
 Feel free to reach out to me via email at [daniel.king@example.com](mailto:daniel.king@example.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-king-igwe/).
