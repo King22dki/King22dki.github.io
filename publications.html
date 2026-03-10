@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications & Research | Daniel King</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-color: #1a365d; --secondary-color: #2c5282; --accent-color: #3182ce; --text-color: #2d3748; --light-bg: #f7fafc; --white: #ffffff; --gray-200: #edf2f7; --gray-600: #718096; --transition: all 0.3s ease; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-color); line-height: 1.8; background-color: var(--light-bg); }
+        h1, h2, h3 { font-family: 'Merriweather', serif; font-weight: 700; color: var(--primary-color); }
+        nav { background-color: var(--primary-color); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        nav .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-size: 1.5rem; font-weight: 700; color: var(--white); font-family: 'Merriweather', serif; text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul li a { color: var(--white); font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; transition: var(--transition); text-decoration: none; }
+        nav ul li a:hover { background-color: var(--secondary-color); }
+        .page-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--white); padding: 4rem 0; text-align: center; }
+        .page-header h1 { color: var(--white); font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.95; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        .content-section { background-color: var(--white); margin: 2rem 0; padding: 2.5rem; border-radius: 12px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08); }
+        .content-section h2 { font-size: 2rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 3px solid var(--accent-color); }
+        .publication-item { background-color: var(--light-bg); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: var(--transition); }
+        .publication-item:hover { transform: translateX(5px); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        .pub-title { font-size: 1.3rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .pub-authors { color: var(--gray-600); margin-bottom: 0.5rem; }
+        .pub-venue { font-style: italic; color: var(--secondary-color); margin-bottom: 0.5rem; }
+        .pub-abstract { margin-top: 1rem; line-height: 1.7; }
+        .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .research-card { background: linear-gradient(135deg, var(--accent-color), var(--secondary-color)); color: var(--white); padding: 2rem; border-radius: 12px; text-align: center; }
+        .research-card i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.9; }
+        .research-card h3 { color: var(--white); font-size: 1.3rem; margin-bottom: 0.5rem; }
+        footer { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 2rem 0; margin-top: 3rem; }
+        @media (max-width: 768px) { .page-header h1 { font-size: 2.2rem; } nav .container { flex-direction: column; gap: 1rem; } nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; } .research-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Daniel King</a>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="blog-archive.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Publications & Research</h1>
+            <p>Academic contributions and ongoing research interests</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <h2><i class="fas fa-book"></i> Master's Thesis</h2>
+            <div class="publication-item">
+                <div class="pub-title">Development of Group Contribution Models for Furanic Compounds</div>
+                <div class="pub-authors">Daniel King Igwe</div>
+                <div class="pub-venue">Imperial College London, September 2020 | Funding: £3.5 million</div>
+                <div class="pub-abstract">
+                    <strong>Abstract:</strong> This thesis presents the development of novel group contribution models for predicting thermodynamic properties of furanic compounds using Statistical Associating Fluid Theory (SAFT) Equation of State. Furanic compounds, derived from biomass, are increasingly important in sustainable chemical processes. The research utilized advanced computational methods and Python-based data analysis (Matplotlib, Pandas, scikit-learn, NumPy) to model fluid phase equilibria. The developed models enable accurate prediction of properties crucial for process design in bio-refineries and sustainable chemical manufacturing. Database integration involved converting and optimizing data formats (CSV to XML and JSON) for efficient computation and validation against experimental measurements.
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-flask"></i> Research Interests</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Machine learning, deep learning, neural networks, and their applications in various domains</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-infinity"></i>
+                    <h3>Probability Theory</h3>
+                    <p>High-dimensional spaces, stochastic processes, and probabilistic modeling</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-atom"></i>
+                    <h3>Neuroscience</h3>
+                    <p>Neural coding, information theory in biological systems, and brain-inspired computing</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Chemical Engineering</h3>
+                    <p>Process modeling, thermodynamics, fluid mechanics, and sustainable technologies</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Philosophy of Mind</h3>
+                    <p>Consciousness, artificial general intelligence, and cognitive science</p>
+                </div>
+                <div class="research-card">
+                    <i class="fas fa-square-root-alt"></i>
+                    <h3>Applied Mathematics</h3>
+                    <p>Numerical methods, optimization, differential equations, and computational science</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-file-alt"></i> Conference Presentations & Seminars</h2>
+            <p style="margin-bottom: 2rem;">
+                As an autodidact with broad intellectual curiosity, I regularly attend and participate in seminars across diverse fields including philosophy, computer science, mathematics, physics, chemistry, and neuroscience. These interdisciplinary engagements inform my research and teaching.
+            </p>
+            <div class="publication-item">
+                <div class="pub-title">Air Pollution Dispersion Modeling Using Computational Fluid Dynamics</div>
+                <div class="pub-authors">Daniel King Igwe</div>
+                <div class="pub-venue">London South Bank University Research Symposium, 2019</div>
+                <div class="pub-abstract">
+                    Presented research on comprehensive air pollution dispersion modeling using Star CCM+ to predict complex air flows around seven high-rise buildings in London. Investigated integration of deep learning with CFD for adaptive meshing strategies to improve computational efficiency and accuracy in urban environmental modeling.
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-newspaper"></i> Technical Writing & Blog</h2>
+            <p>
+                Beyond formal academic publications, I maintain an active blog exploring intersections of AI, mathematics, engineering, and philosophy. Recent articles include:
+            </p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li style="margin-bottom: 1rem;"><a href="blog-post-1.html" style="color: var(--accent-color); font-weight: 600;">Exploring High-Dimensional Probability Spaces in AI</a> - Analysis of concentration of measure phenomena and implications for neural networks</li>
+                <li style="margin-bottom: 1rem;"><a href="blog-post-2.html" style="color: var(--accent-color); font-weight: 600;">Neural Coding and Information Theory</a> - Cross-disciplinary perspective bridging neuroscience and machine learning</li>
+                <li style="margin-bottom: 1rem;"><a href="blog-post-3.html" style="color: var(--accent-color); font-weight: 600;">Stochastic Processes in Chemical Reactor Design</a> - Mathematical approaches to uncertainty in engineering systems</li>
+                <li style="margin-bottom: 1rem;"><a href="blog-post-4.html" style="color: var(--accent-color); font-weight: 600;">The Philosophy of Mind Meets Machine Learning</a> - Epistemological inquiry into consciousness and AI</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-users"></i> Collaborations & Projects</h2>
+            <p style="margin-bottom: 1.5rem;">
+                I am actively involved in collaborative research through <a href="https://queryous.ai/" target="_blank" style="color: var(--accent-color); font-weight: 600;">Queryous</a>, focusing on democratizing generative AI for educational applications. This work involves empirical evaluation of large language models, prompt engineering research, and development of AI-enhanced learning systems.
+            </p>
+            <p>
+                I welcome collaboration opportunities in areas spanning AI research, mathematical modeling, educational technology, and interdisciplinary theoretical work. Feel free to <a href="index.html#contact" style="color: var(--accent-color); font-weight: 600;">reach out</a> to discuss potential projects or research directions.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Daniel King. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Daniel King - Extended | Daniel King</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-color: #1a365d; --secondary-color: #2c5282; --accent-color: #3182ce; --text-color: #2d3748; --light-bg: #f7fafc; --white: #ffffff; --gray-200: #edf2f7; --gray-600: #718096; --transition: all 0.3s ease; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-color); line-height: 1.8; background-color: var(--light-bg); }
+        h1, h2, h3 { font-family: 'Merriweather', serif; font-weight: 700; color: var(--primary-color); }
+        nav { background-color: var(--primary-color); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        nav .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-size: 1.5rem; font-weight: 700; color: var(--white); font-family: 'Merriweather', serif; text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul li a { color: var(--white); font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; transition: var(--transition); text-decoration: none; }
+        nav ul li a:hover { background-color: var(--secondary-color); }
+        .page-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--white); padding: 4rem 0; text-align: center; }
+        .page-header h1 { color: var(--white); font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.95; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        .content-section { background-color: var(--white); margin: 2rem 0; padding: 2.5rem; border-radius: 12px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08); }
+        .content-section h2 { font-size: 2rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 3px solid var(--accent-color); }
+        .content-section p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
+        .quote-box { background: linear-gradient(135deg, var(--accent-color), var(--secondary-color)); color: var(--white); padding: 2rem; border-radius: 12px; margin: 2rem 0; font-style: italic; font-size: 1.2rem; text-align: center; }
+        .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .interest-card { background-color: var(--light-bg); padding: 1.5rem; border-radius: 8px; text-align: center; transition: var(--transition); border-left: 4px solid var(--accent-color); }
+        .interest-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        .interest-card i { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 0.5rem; }
+        footer { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 2rem 0; margin-top: 3rem; }
+        @media (max-width: 768px) { .page-header h1 { font-size: 2.2rem; } nav .container { flex-direction: column; gap: 1rem; } nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; } .interests-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Daniel King</a>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="blog-archive.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>About Daniel King</h1>
+            <p>A deeper look into my journey, philosophy, and aspirations</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <h2><i class="fas fa-user-circle"></i> Who I Am</h2>
+            <p>
+                I am, first and foremost, a curious person. My journey through chemical engineering, teaching, and AI research has been driven not by a predetermined career path but by an insatiable desire to understand how things work—from molecular interactions in chemical processes to information flow in neural networks, from abstract mathematical structures to the nature of consciousness itself.
+            </p>
+            <p>
+                As an autodidact, I've learned that the most profound insights often emerge at the boundaries between disciplines. Mathematics provides the language, engineering offers the constraints of reality, neuroscience reveals how nature solved certain problems, and philosophy asks whether we're even asking the right questions. My approach to learning and research is fundamentally interdisciplinary, seeking connections where others see only separation.
+            </p>
+            <div class="quote-box">
+                "The important thing is not to stop questioning. Curiosity has its own reason for existing."<br>— Albert Einstein
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-lightbulb"></i> Intellectual Interests</h2>
+            <p>
+                My intellectual pursuits span a wide range of fields, unified by common themes of understanding complex systems, uncertainty, and information:
+            </p>
+            
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Exploring how machines can learn, reason, and potentially understand</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-infinity"></i>
+                    <h3>Mathematics</h3>
+                    <p>Probability theory, high-dimensional geometry, and applied mathematics</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-atom"></i>
+                    <h3>Neuroscience</h3>
+                    <p>Neural coding, information theory, and biological computation</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Chemical Engineering</h3>
+                    <p>Process dynamics, thermodynamics, and sustainable technologies</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-microscope"></i>
+                    <h3>Physics</h3>
+                    <p>Statistical mechanics, quantum phenomena, and emergent behavior</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-yin-yang"></i>
+                    <h3>Philosophy</h3>
+                    <p>Philosophy of mind, epistemology, ethics, and philosophy of science</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-road"></i> My Journey</h2>
+            <p>
+                My path has been anything but linear. I began with chemical engineering, drawn to the challenge of designing processes that transform matter at scale. My undergraduate and master's work at London South Bank University and Imperial College London provided rigorous technical training, but also revealed gaps—particularly around uncertainty, variability, and the limitations of deterministic models.
+            </p>
+            <p>
+                This led me to probability theory and statistics, initially as tools for engineering but increasingly as fascinating subjects in their own right. How do we reason under uncertainty? How does randomness give rise to predictable patterns? These questions connect engineering, mathematics, and AI in profound ways.
+            </p>
+            <p>
+                Teaching became another dimension of my journey. Working with students—from those struggling with basic concepts to those pushing at the boundaries—taught me as much as formal education ever did. It forced me to clarify my own understanding, to find multiple pathways to the same insight, and to appreciate that intelligence manifests in many forms.
+            </p>
+            <p>
+                Co-founding <a href="https://queryous.ai/" target="_blank" style="color: var(--accent-color); font-weight: 600;">Queryous</a> represented a synthesis: applying AI research to educational challenges, making powerful technologies accessible to those who need them most, and working collaboratively on problems that matter. It's an ongoing experiment in translating ideas into impact.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-compass"></i> Research Philosophy</h2>
+            <p>
+                I approach research with several guiding principles:
+            </p>
+            <p>
+                <strong>Depth Over Breadth (But Both Matter):</strong> While I explore many fields, I believe in going deep enough to actually contribute rather than skimming surfaces. It's better to genuinely understand one difficult thing than to superficially know ten.
+            </p>
+            <p>
+                <strong>Rigor With Humility:</strong> Mathematical and scientific rigor matter—sloppy thinking leads to wrong conclusions. But so does intellectual humility. Our current theories are incomplete approximations, not final truths. The most interesting questions are often those we don't yet know how to formalize.
+            </p>
+            <p>
+                <strong>Theory Grounded in Reality:</strong> Abstract theory is beautiful, but it should ultimately connect to observable phenomena and practical problems. The best theories explain reality; the best applications leverage deep theory.
+            </p>
+            <p>
+                <strong>Interdisciplinary Synthesis:</strong> Many important problems require integrating insights from multiple fields. Chemical reactor optimization might benefit from AI; understanding neural networks might benefit from neuroscience; both benefit from probability theory and information theory.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-heart"></i> Life Beyond Academia</h2>
+            <p>
+                While intellectual pursuits dominate my professional life, I believe in balance and embodied cognition. Physical activities like bouldering and Brazilian Jiu Jitsu provide different modes of problem-solving—reading rock faces or opponents, making split-second decisions under pressure, learning through direct physical feedback. These aren't merely recreation but alternative forms of intelligence and learning.
+            </p>
+            <p>
+                Reading broadly—from technical papers to literature to philosophy—keeps my thinking fresh and prevents narrow specialization. Attending seminars on diverse topics (philosophy of mind one week, quantum computing the next, political economy after that) exposes me to different ways of thinking and argumentation.
+            </p>
+            <p>
+                Gaming and drawing, though "hobbies," are also creative outlets and sources of inspiration. Games involve complex systems with emergent behavior; drawing requires translating three-dimensional space to two dimensions, engaging different cognitive faculties than mathematical or verbal reasoning.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-mountain"></i> Values & Worldview</h2>
+            <p>
+                Several core values guide my work and life:
+            </p>
+            <p>
+                <strong>Sustainability:</strong> As a chemical engineer, I'm acutely aware of humanity's impact on planetary systems. Developing sustainable technologies and processes isn't optional—it's existentially necessary. This informs my interest in clean technology, process optimization, and mindful application of AI.
+            </p>
+            <p>
+                <strong>Ethics & Responsibility:</strong> Technology is never neutral. AI systems can amplify biases, deepen inequalities, or concentrate power. As researchers and developers, we have ethical obligations to consider impacts, involve diverse perspectives, and advocate for responsible deployment. This is why I'm involved in educational AI rather than, say, advertising optimization.
+            </p>
+            <p>
+                <strong>Accessibility & Democratization:</strong> Knowledge and powerful tools shouldn't be the exclusive domain of elites. Making AI and advanced education accessible to smaller institutions, developing countries, and underserved communities is both ethically right and practically wise—we need diverse minds working on global challenges.
+            </p>
+            <p>
+                <strong>Intellectual Honesty:</strong> It's better to say "I don't know" than to pretend certainty. It's better to acknowledge the limitations of one's methods than to overstate conclusions. Science progresses through error correction, not through defending positions.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-rocket"></i> Looking Forward</h2>
+            <p>
+                Where am I headed? The honest answer is: I don't know exactly, and I'm okay with that. Rigid plans often miss unexpected opportunities. But some directions seem promising:
+            </p>
+            <p>
+                <strong>AI Research:</strong> Understanding how neural networks represent and process information, connecting machine learning to biological learning, developing more interpretable and robust systems.
+            </p>
+            <p>
+                <strong>Mathematical Modeling:</strong> Applying probability theory and stochastic processes to real-world systems—whether chemical reactors, biological networks, or social dynamics.
+            </p>
+            <p>
+                <strong>Educational Innovation:</strong> Leveraging AI thoughtfully to personalize learning, break down barriers, and make education more effective and accessible.
+            </p>
+            <p>
+                <strong>Interdisciplinary Bridges:</strong> Facilitating conversations between fields that don't usually talk—bringing engineering rigor to AI, computational methods to philosophy, neuroscience insights to machine learning.
+            </p>
+            <p>
+                Ultimately, I hope to contribute to understanding—understanding of intelligent systems, of complex processes, of how we learn and know. If along the way I can help others learn, solve practical problems, and make technologies more beneficial and accessible, even better.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-handshake"></i> Let's Connect</h2>
+            <p>
+                If you've read this far, you probably share some of my interests. I'm always happy to discuss ideas, explore collaborations, or simply have intellectually stimulating conversations. Whether you're a student, researcher, educator, or curious mind, feel free to reach out.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-color); font-weight: 600; font-size: 1.1rem;">
+                    <i class="fas fa-envelope"></i>
+                    Get in touch
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Daniel King. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

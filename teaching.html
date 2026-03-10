@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching & Education | Daniel King</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-color: #1a365d; --secondary-color: #2c5282; --accent-color: #3182ce; --text-color: #2d3748; --light-bg: #f7fafc; --white: #ffffff; --gray-200: #edf2f7; --gray-600: #718096; --transition: all 0.3s ease; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-color); line-height: 1.8; background-color: var(--light-bg); }
+        h1, h2, h3 { font-family: 'Merriweather', serif; font-weight: 700; color: var(--primary-color); }
+        nav { background-color: var(--primary-color); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        nav .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { font-size: 1.5rem; font-weight: 700; color: var(--white); font-family: 'Merriweather', serif; text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul li a { color: var(--white); font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; transition: var(--transition); text-decoration: none; }
+        nav ul li a:hover { background-color: var(--secondary-color); }
+        .page-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--white); padding: 4rem 0; text-align: center; }
+        .page-header h1 { color: var(--white); font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.95; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        .content-section { background-color: var(--white); margin: 2rem 0; padding: 2.5rem; border-radius: 12px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08); }
+        .content-section h2 { font-size: 2rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 3px solid var(--accent-color); }
+        .content-section p { margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.8; }
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .course-card { background-color: var(--light-bg); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: var(--transition); }
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        .course-card h3 { color: var(--secondary-color); margin-bottom: 1rem; }
+        .philosophy-box { background: linear-gradient(135deg, var(--accent-color), var(--secondary-color)); color: var(--white); padding: 2rem; border-radius: 12px; margin: 2rem 0; }
+        .philosophy-box h3 { color: var(--white); }
+        .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .highlight-card { text-align: center; padding: 1.5rem; background-color: var(--light-bg); border-radius: 8px; }
+        .highlight-card i { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem; }
+        footer { background-color: var(--primary-color); color: var(--white); text-align: center; padding: 2rem 0; margin-top: 3rem; }
+        @media (max-width: 768px) { .page-header h1 { font-size: 2.2rem; } nav .container { flex-direction: column; gap: 1rem; } nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; } .course-grid, .highlight-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Daniel King</a>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="blog-archive.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Teaching & Education</h1>
+            <p>Fostering curiosity, critical thinking, and deep understanding</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <h2><i class="fas fa-chalkboard-teacher"></i> Teaching Philosophy</h2>
+            <div class="philosophy-box">
+                <h3>Learning as Discovery</h3>
+                <p style="color: var(--white); opacity: 0.95;">
+                    I believe that effective teaching goes beyond mere transmission of information—it involves cultivating genuine curiosity, developing critical thinking skills, and empowering students to become independent learners. Mathematics and engineering are not collections of formulas to memorize but ways of thinking about the world. My approach emphasizes understanding over memorization, application over abstraction, and connections between disciplines over isolated facts.
+                </p>
+                <p style="color: var(--white); opacity: 0.95; margin-top: 1rem;">
+                    As an autodidact myself, I understand the challenges and rewards of self-directed learning. I strive to create environments where students feel comfortable asking questions, making mistakes, and exploring ideas deeply. Technology, particularly AI tools, offers tremendous potential to personalize learning and make education more accessible—when used thoughtfully and ethically.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-book-open"></i> Current Teaching Responsibilities</h2>
+            <p>
+                As an Engineering Lecturer at London South Bank Technical College, I teach across multiple subject areas, contributing to both technical education and digital learning innovation.
+            </p>
+            
+            <div class="course-grid">
+                <div class="course-card">
+                    <h3><i class="fas fa-square-root-alt"></i> Engineering Mathematics</h3>
+                    <p><strong>Topics:</strong></p>
+                    <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Linear Algebra</li>
+                        <li>Calculus (differential and integral)</li>
+                        <li>Statistics and Probability</li>
+                        <li>Algebra and Problem-Solving</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Emphasis on mathematical reasoning, visualization, and application to engineering problems.</p>
+                </div>
+
+                <div class="course-card">
+                    <h3><i class="fas fa-flask"></i> Scientific Investigation</h3>
+                    <p><strong>Focus Areas:</strong></p>
+                    <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Experimental design and methodology</li>
+                        <li>Data collection and analysis</li>
+                        <li>Scientific communication</li>
+                        <li>Critical evaluation of evidence</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Developing students' ability to conduct rigorous scientific inquiry and communicate findings effectively.</p>
+                </div>
+
+                <div class="course-card">
+                    <h3><i class="fas fa-chart-line"></i> Data Analysis</h3>
+                    <p><strong>Coverage:</strong></p>
+                    <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Descriptive and inferential statistics</li>
+                        <li>Data visualization techniques</li>
+                        <li>Python for data analysis</li>
+                        <li>Interpretation and reporting</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Practical skills in working with real-world data, using modern tools and techniques.</p>
+                </div>
+
+                <div class="course-card">
+                    <h3><i class="fas fa-project-diagram"></i> Engineering Project</h3>
+                    <p><strong>Components:</strong></p>
+                    <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Project planning and management</li>
+                        <li>Application of engineering principles</li>
+                        <li>Teamwork and collaboration</li>
+                        <li>Technical documentation</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Capstone experience integrating knowledge across disciplines to solve real engineering challenges.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-laptop-code"></i> Digital Learning & Technology Integration</h2>
+            <p>
+                I contribute to the digital learning team, exploring how technology can enhance educational experiences. This includes:
+            </p>
+            
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI in Education</h3>
+                    <p>Evaluating generative AI tools (LLMs) for personalized learning, automated assessment, and content generation</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Multilingual Learning</h3>
+                    <p>Using AI to create accessible materials for non-native English speakers, breaking language barriers</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Learning Analytics</h3>
+                    <p>Data-driven approaches to understand student progress and optimize teaching strategies</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Interactive Content</h3>
+                    <p>Developing engaging multimedia materials, simulations, and virtual laboratories</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-user-graduate"></i> Previous Teaching Experience</h2>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Graduate Teaching Assistant | The Heathland School (2021-2023)</h3>
+                <p>
+                    Provided tailored support to struggling students in mathematics, science, and computer science. Developed innovative approaches to address individual learning needs, including:
+                </p>
+                <ul style="padding-left: 2rem; margin-top: 0.5rem;">
+                    <li>Personalized tutoring sessions focusing on conceptual understanding</li>
+                    <li>Created multilingual worksheets using ChatGPT for students with limited English proficiency (Portuguese, Spanish, and other languages)</li>
+                    <li>Improved academic performance and confidence through patient, adaptive instruction</li>
+                    <li>Bridged gaps between classroom instruction and individual student needs</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Chemistry & Physics Technician (2023-2024)</h3>
+                <p>
+                    Organized and supported practical laboratory sessions, ensuring safe, effective hands-on learning experiences:
+                </p>
+                <ul style="padding-left: 2rem; margin-top: 0.5rem;">
+                    <li>Prepared and managed chemistry and physics practicals</li>
+                    <li>Operated advanced instrumentation (FTIR spectroscopy, oscilloscopes, photon counters)</li>
+                    <li>Developed new experimental procedures using mathematical modeling</li>
+                    <li>Ensured laboratory safety protocols and hazardous materials management</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-lightbulb"></i> Teaching Methods & Approaches</h2>
+            
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Active Learning</h3>
+                    <p>Problem-based learning, group work, and hands-on activities that engage students directly with material</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Visualization</h3>
+                    <p>Using graphs, diagrams, and computational tools to make abstract concepts concrete and intuitive</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-link"></i>
+                    <h3>Interdisciplinary Connections</h3>
+                    <p>Showing how mathematics, engineering, physics, and computer science interconnect</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Formative Assessment</h3>
+                    <p>Regular feedback, low-stakes quizzes, and iterative improvement rather than high-pressure exams</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Collaborative Learning</h3>
+                    <p>Peer instruction, study groups, and team projects that develop communication skills</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Growth Mindset</h3>
+                    <p>Emphasizing that intelligence and ability can be developed through effort and strategy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-comments"></i> Student Testimonials</h2>
+            <blockquote style="font-style: italic; padding: 1.5rem; background-color: var(--light-bg); border-left: 4px solid var(--accent-color); margin: 1rem 0;">
+                "Daniel has a unique ability to explain complex mathematical concepts in ways that actually make sense. He doesn't just show you how to solve problems—he helps you understand why the methods work."
+                <br><br>
+                <strong>— Engineering Student, 2024</strong>
+            </blockquote>
+            
+            <blockquote style="font-style: italic; padding: 1.5rem; background-color: var(--light-bg); border-left: 4px solid var(--accent-color); margin: 1rem 0;">
+                "The multilingual worksheets were incredibly helpful when I first arrived and struggled with English. It made me feel included and allowed me to learn the material without language being a barrier."
+                <br><br>
+                <strong>— International Student, 2022</strong>
+            </blockquote>
+        </div>
+
+        <div class="content-section">
+            <h2><i class="fas fa-road"></i> Future Directions</h2>
+            <p>
+                I am committed to continuous improvement as an educator. Areas of ongoing development and future goals include:
+            </p>
+            <ul style="padding-left: 2rem; margin-top: 1rem;">
+                <li><strong>AI-Enhanced Learning:</strong> Deepening integration of AI tools for personalized education through my work at Queryous</li>
+                <li><strong>Open Educational Resources:</strong> Creating freely available materials, tutorials, and problem sets</li>
+                <li><strong>Research-Informed Teaching:</strong> Incorporating findings from learning sciences and cognitive psychology</li>
+                <li><strong>Inclusive Education:</strong> Developing strategies to support diverse learners with varying backgrounds and needs</li>
+                <li><strong>Computational Thinking:</strong> Integrating programming and computational methods across engineering curriculum</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Daniel King. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
