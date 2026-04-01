@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Investment Portfolio Calculator - Daniel King">
+    <meta name="author" content="Daniel King">
+    <title>Investment Calculator | Daniel King</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2c5282;
+            --accent-color: #3182ce;
+            --text-color: #2d3748;
+            --light-bg: #f7fafc;
+            --white: #ffffff;
+            --gray-200: #edf2f7;
+            --gray-300: #e2e8f0;
+            --gray-600: #718096;
+            --gray-700: #4a5568;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --transition: all 0.3s ease;
+
+            /* Asset class colours */
+            --stocks-color: #3182ce;
+            --bonds-color: #38a169;
+            --realestate-color: #d69e2e;
+            --crypto-color: #805ad5;
+            --savings-color: #dd6b20;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.7;
+            background-color: var(--light-bg);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--primary-color);
+        }
+
+        /* ── Navigation ── */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            font-family: 'Merriweather', serif;
+            text-decoration: none;
+        }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul li a {
+            color: var(--white);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        nav ul li a:hover { background-color: var(--secondary-color); }
+
+        /* ── Page header ── */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+        .page-header h1 { color: var(--white); font-size: 2.8rem; margin-bottom: 0.75rem; }
+        .page-header p { font-size: 1.15rem; opacity: 0.92; max-width: 700px; margin: 0 auto; }
+
+        /* ── Layout ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 2rem;
+            margin: 2.5rem auto 3rem;
+        }
+
+        /* ── Panels ── */
+        .panel {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            padding: 2rem;
+        }
+        .panel h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        /* ── Asset type selector ── */
+        .asset-tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.75rem;
+        }
+        .asset-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.6rem 0.25rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            background: var(--light-bg);
+            transition: var(--transition);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .asset-tab i { font-size: 1.2rem; }
+        .asset-tab:hover { border-color: var(--accent-color); color: var(--accent-color); background: #ebf4ff; }
+        .asset-tab.active[data-asset="stocks"]     { border-color: var(--stocks-color);     color: var(--stocks-color);     background: #ebf4ff; }
+        .asset-tab.active[data-asset="bonds"]      { border-color: var(--bonds-color);      color: var(--bonds-color);      background: #f0fff4; }
+        .asset-tab.active[data-asset="realestate"] { border-color: var(--realestate-color); color: var(--realestate-color); background: #fffbeb; }
+        .asset-tab.active[data-asset="crypto"]     { border-color: var(--crypto-color);     color: var(--crypto-color);     background: #faf5ff; }
+        .asset-tab.active[data-asset="savings"]    { border-color: var(--savings-color);    color: var(--savings-color);    background: #fff8f1; }
+
+        /* ── Form fields ── */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.45rem;
+            color: var(--gray-700);
+        }
+        .form-group label .hint {
+            font-weight: 400;
+            color: var(--gray-600);
+            font-size: 0.8rem;
+        }
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-prefix, .input-suffix {
+            position: absolute;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            pointer-events: none;
+        }
+        .input-prefix { left: 0.75rem; }
+        .input-suffix { right: 0.75rem; }
+        .input-wrap input[type="number"],
+        .input-wrap input[type="text"],
+        .input-wrap select {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            background: var(--white);
+            transition: var(--transition);
+            -moz-appearance: textfield;
+        }
+        .input-wrap input::-webkit-outer-spin-button,
+        .input-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .input-wrap.has-prefix input  { padding-left: 1.8rem; }
+        .input-wrap.has-suffix input  { padding-right: 2.5rem; }
+        .input-wrap input:focus, .input-wrap select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(49,130,206,0.15);
+        }
+
+        /* range slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--gray-300);
+            outline: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: none;
+        }
+
+        .slider-row { display: flex; gap: 0.75rem; align-items: center; }
+        .slider-row input[type="range"] { flex: 1; }
+        .slider-value {
+            min-width: 3.5rem;
+            text-align: right;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--accent-color);
+        }
+
+        /* toggle row */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        .toggle {
+            position: relative;
+            width: 42px;
+            height: 22px;
+        }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--gray-300);
+            border-radius: 22px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle-slider:before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .toggle input:checked + .toggle-slider { background: var(--accent-color); }
+        .toggle input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+        /* calculate button */
+        .btn-calculate {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(49,130,206,0.35);
+        }
+        .btn-calculate:active { transform: translateY(0); }
+
+        /* ── Results panel ── */
+        .results-panel { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        /* summary cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .summary-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+            border-top: 4px solid var(--accent-color);
+        }
+        .summary-card.highlight { border-top-color: var(--success); }
+        .summary-card.neutral   { border-top-color: var(--warning); }
+        .summary-card-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-600);
+            margin-bottom: 0.4rem;
+        }
+        .summary-card-value {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        .summary-card-sub {
+            font-size: 0.78rem;
+            color: var(--gray-600);
+            margin-top: 0.3rem;
+        }
+
+        /* chart area */
+        .chart-panel {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            padding: 1.75rem;
+        }
+        .chart-panel h3 {
+            font-size: 1.15rem;
+            margin-bottom: 1.25rem;
+            color: var(--primary-color);
+        }
+        .chart-container { position: relative; height: 280px; }
+        canvas { width: 100% !important; }
+
+        .chart-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        /* year-by-year table */
+        .table-panel {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            padding: 1.75rem;
+        }
+        .table-panel h3 { font-size: 1.15rem; margin-bottom: 1.25rem; }
+        .table-scroll { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+        thead th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.65rem 0.9rem;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        thead th:first-child { text-align: left; border-radius: 6px 0 0 0; }
+        thead th:last-child  { border-radius: 0 6px 0 0; }
+        tbody tr:nth-child(even) { background: var(--light-bg); }
+        tbody td {
+            padding: 0.55rem 0.9rem;
+            text-align: right;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        tbody td:first-child { text-align: left; font-weight: 600; color: var(--primary-color); }
+        .gain { color: var(--success); font-weight: 600; }
+
+        /* disclaimer */
+        .disclaimer {
+            background: #fff8e1;
+            border-left: 4px solid var(--warning);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem;
+            font-size: 0.82rem;
+            color: #7b5e00;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+        }
+        .disclaimer strong { color: #5c4400; }
+
+        /* placeholder state */
+        .placeholder-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--gray-600);
+            gap: 1rem;
+        }
+        .placeholder-state i { font-size: 3rem; opacity: 0.3; }
+        .placeholder-state p { font-size: 1rem; }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .calculator-layout { grid-template-columns: 1fr; }
+            .summary-cards { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .page-header h1 { font-size: 2rem; }
+            nav .container { flex-direction: column; gap: 1rem; }
+            nav ul { gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+            .asset-tabs { grid-template-columns: repeat(3, 1fr); }
+            .summary-cards { grid-template-columns: 1fr 1fr; }
+            .summary-cards .summary-card:last-child { grid-column: span 2; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo">Daniel King</a>
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="blog-archive.html">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Header -->
+<div class="page-header">
+    <div class="container">
+        <h1>Investment Portfolio Calculator</h1>
+        <p>Project the future value of your portfolio across stocks, bonds, real estate, crypto, and savings — with and without inflation adjustment.</p>
+    </div>
+</div>
+
+<!-- Main calculator -->
+<div class="container">
+    <div class="calculator-layout">
+
+        <!-- ── Left: Inputs ── -->
+        <div class="panel">
+            <h2><i class="fas fa-sliders-h" style="color:var(--accent-color);margin-right:0.5rem;"></i>Parameters</h2>
+
+            <!-- Asset class tabs -->
+            <div class="asset-tabs">
+                <button class="asset-tab active" data-asset="stocks" onclick="setAsset('stocks',this)">
+                    <i class="fas fa-chart-line"></i>Stocks / ETFs
+                </button>
+                <button class="asset-tab" data-asset="bonds" onclick="setAsset('bonds',this)">
+                    <i class="fas fa-file-invoice-dollar"></i>Bonds
+                </button>
+                <button class="asset-tab" data-asset="realestate" onclick="setAsset('realestate',this)">
+                    <i class="fas fa-home"></i>Real Estate
+                </button>
+                <button class="asset-tab" data-asset="crypto" onclick="setAsset('crypto',this)">
+                    <i class="fab fa-bitcoin"></i>Crypto
+                </button>
+                <button class="asset-tab" data-asset="savings" onclick="setAsset('savings',this)">
+                    <i class="fas fa-piggy-bank"></i>Savings
+                </button>
+            </div>
+
+            <!-- Initial investment -->
+            <div class="form-group">
+                <label>Initial Investment <span class="hint">Lump sum today</span></label>
+                <div class="input-wrap has-prefix">
+                    <span class="input-prefix">£</span>
+                    <input type="number" id="initial" value="10000" min="0" step="500" onchange="liveUpdate()">
+                </div>
+            </div>
+
+            <!-- Monthly contribution -->
+            <div class="form-group">
+                <label>Monthly Contribution <span class="hint">Regular top-up</span></label>
+                <div class="input-wrap has-prefix">
+                    <span class="input-prefix">£</span>
+                    <input type="number" id="monthly" value="200" min="0" step="50" onchange="liveUpdate()">
+                </div>
+            </div>
+
+            <!-- Annual return -->
+            <div class="form-group">
+                <label>Expected Annual Return <span class="hint" id="return-hint">Stocks: ~7–10 % historical</span></label>
+                <div class="slider-row">
+                    <input type="range" id="return-slider" min="0" max="50" step="0.5" value="8"
+                           oninput="syncSlider('return','%'); liveUpdate()">
+                    <span class="slider-value" id="return-val">8.0%</span>
+                </div>
+                <div class="input-wrap has-suffix" style="margin-top:0.5rem;">
+                    <input type="number" id="return" value="8" min="0" max="50" step="0.5"
+                           oninput="syncInput('return'); liveUpdate()">
+                    <span class="input-suffix">%</span>
+                </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="form-group">
+                <label>Investment Period</label>
+                <div class="slider-row">
+                    <input type="range" id="years-slider" min="1" max="50" step="1" value="20"
+                           oninput="syncSlider('years','yr'); liveUpdate()">
+                    <span class="slider-value" id="years-val">20 yr</span>
+                </div>
+                <div class="input-wrap has-suffix" style="margin-top:0.5rem;">
+                    <input type="number" id="years" value="20" min="1" max="50" step="1"
+                           oninput="syncInput('years'); liveUpdate()">
+                    <span class="input-suffix">yrs</span>
+                </div>
+            </div>
+
+            <!-- Compounding -->
+            <div class="form-group">
+                <label>Compounding Frequency</label>
+                <div class="input-wrap">
+                    <select id="compound" onchange="liveUpdate()">
+                        <option value="12">Monthly</option>
+                        <option value="4">Quarterly</option>
+                        <option value="2">Semi-annually</option>
+                        <option value="1" selected>Annually</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Toggles -->
+            <div class="toggle-row">
+                <span><i class="fas fa-chart-pie" style="margin-right:0.4rem;color:var(--accent-color);"></i>Adjust for Inflation (2.5% p.a.)</span>
+                <label class="toggle">
+                    <input type="checkbox" id="inflation" onchange="liveUpdate()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="toggle-row">
+                <span><i class="fas fa-percent" style="margin-right:0.4rem;color:var(--accent-color);"></i>Include Capital Gains Tax (20%)</span>
+                <label class="toggle">
+                    <input type="checkbox" id="cgt" onchange="liveUpdate()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <button class="btn-calculate" onclick="calculate()">
+                <i class="fas fa-calculator" style="margin-right:0.5rem;"></i>Calculate Portfolio Value
+            </button>
+        </div>
+
+        <!-- ── Right: Results ── -->
+        <div class="results-panel" id="results-panel">
+            <div class="panel placeholder-state" id="placeholder">
+                <i class="fas fa-chart-area"></i>
+                <p>Set your parameters on the left and click <strong>Calculate</strong> to project your portfolio value.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+        <strong>⚠ Disclaimer:</strong> This calculator is for <strong>illustrative and educational purposes only</strong> and does not constitute financial advice. Returns shown are hypothetical and based on constant growth rates — actual investment returns vary and are not guaranteed. Past performance is not indicative of future results. For personal financial planning, please consult a qualified financial adviser.
+    </div>
+    <div style="height:2rem;"></div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Daniel King. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+/* ────────────────────────────────────────
+   Asset presets
+──────────────────────────────────────── */
+const ASSETS = {
+    stocks:     { label: 'Stocks / ETFs', return: 8,    color: '#3182ce', hint: 'Stocks: ~7–10% historical (S&P 500)' },
+    bonds:      { label: 'Bonds',         return: 3.5,  color: '#38a169', hint: 'Bonds: ~2–5% typical yield' },
+    realestate: { label: 'Real Estate',   return: 6,    color: '#d69e2e', hint: 'Real estate: ~5–8% total return' },
+    crypto:     { label: 'Crypto',        return: 20,   color: '#805ad5', hint: 'Crypto: highly volatile, past highs ~20–50%' },
+    savings:    { label: 'Savings',       return: 4.5,  color: '#dd6b20', hint: 'Savings: ~3–5% high-yield accounts (2024)' },
+};
+
+let currentAsset = 'stocks';
+let chartInstance = null;
+
+/* ────────────────────────────────────────
+   Asset tab selection
+──────────────────────────────────────── */
+function setAsset(asset, el) {
+    currentAsset = asset;
+    document.querySelectorAll('.asset-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+
+    const preset = ASSETS[asset];
+    document.getElementById('return').value        = preset.return;
+    document.getElementById('return-slider').value = preset.return;
+    document.getElementById('return-val').textContent = preset.return.toFixed(1) + '%';
+    document.getElementById('return-hint').textContent = preset.hint;
+
+    liveUpdate();
+}
+
+/* ────────────────────────────────────────
+   Slider ↔ input sync
+──────────────────────────────────────── */
+function syncSlider(id, unit) {
+    const v = parseFloat(document.getElementById(id + '-slider').value);
+    document.getElementById(id).value = v;
+    document.getElementById(id + '-val').textContent = v.toFixed(unit === '%' ? 1 : 0) + (unit === '%' ? '%' : ' yr');
+}
+function syncInput(id) {
+    const v = parseFloat(document.getElementById(id).value) || 0;
+    document.getElementById(id + '-slider').value = v;
+    const unit = id === 'return' ? '%' : ' yr';
+    document.getElementById(id + '-val').textContent = v.toFixed(id === 'return' ? 1 : 0) + unit;
+}
+
+/* ────────────────────────────────────────
+   Formatting helpers
+──────────────────────────────────────── */
+function fmt(n) {
+    if (n >= 1e6) return '£' + (n / 1e6).toFixed(2) + 'M';
+    if (n >= 1e3) return '£' + (n / 1e3).toFixed(1) + 'k';
+    return '£' + n.toFixed(0);
+}
+function fmtFull(n) {
+    return '£' + Math.round(n).toLocaleString('en-GB');
+}
+
+/* ────────────────────────────────────────
+   Core calculation
+──────────────────────────────────────── */
+function computeYearlyData(initial, monthly, annualRate, years, compoundsPerYear, inflationRate, applyCGT) {
+    const r = annualRate / 100 / compoundsPerYear;
+    const periodsPerYear = compoundsPerYear;
+    const inflFactor = inflationRate / 100;
+
+    let value = initial;
+    const data = [];
+
+    for (let y = 1; y <= years; y++) {
+        // compound for each period in the year
+        for (let p = 0; p < periodsPerYear; p++) {
+            value *= (1 + r);
+            value += monthly * (12 / periodsPerYear);
+        }
+        let nominalValue = value;
+
+        // inflation-adjust (real value)
+        let realValue = applyCGT ? null : nominalValue / Math.pow(1 + inflFactor, y);
+
+        data.push({ year: y, nominal: nominalValue });
+    }
+    return data;
+}
+
+/* ────────────────────────────────────────
+   Main calculate function
+──────────────────────────────────────── */
+function calculate() {
+    const initial  = parseFloat(document.getElementById('initial').value)  || 0;
+    const monthly  = parseFloat(document.getElementById('monthly').value)  || 0;
+    const rate     = parseFloat(document.getElementById('return').value)   || 0;
+    const years    = parseInt(document.getElementById('years').value)      || 1;
+    const compound = parseInt(document.getElementById('compound').value)   || 1;
+    const inflation = document.getElementById('inflation').checked;
+    const cgt       = document.getElementById('cgt').checked;
+
+    const INFLATION_RATE = 2.5;
+    const CGT_RATE       = 0.20;
+
+    // Build year-by-year data
+    const yearlyData = [];
+    const r = rate / 100 / compound;
+    let value = initial;
+
+    for (let y = 1; y <= years; y++) {
+        for (let p = 0; p < compound; p++) {
+            value *= (1 + r);
+            value += monthly * (12 / compound);
+        }
+        yearlyData.push(value);
+    }
+
+    const finalNominal   = yearlyData[years - 1];
+    const totalContrib   = initial + monthly * 12 * years;
+    let   finalValue     = finalNominal;
+
+    // Apply CGT on gains
+    if (cgt) {
+        const gain = Math.max(0, finalValue - totalContrib);
+        finalValue = totalContrib + gain * (1 - CGT_RATE);
+    }
+
+    // Inflation-adjust
+    let realValue = finalValue;
+    if (inflation) {
+        realValue = finalValue / Math.pow(1 + INFLATION_RATE / 100, years);
+    }
+
+    // Real yearly series for chart
+    const realYearly = yearlyData.map((v, i) => {
+        let adj = v;
+        if (cgt) {
+            const gain = Math.max(0, adj - totalContrib);
+            adj = totalContrib + gain * (1 - CGT_RATE);
+        }
+        if (inflation) adj = adj / Math.pow(1 + INFLATION_RATE / 100, i + 1);
+        return adj;
+    });
+
+    const contribYearly = Array.from({ length: years }, (_, i) => initial + monthly * 12 * (i + 1));
+
+    renderResults({
+        yearlyData,
+        realYearly,
+        contribYearly,
+        finalValue,
+        realValue,
+        totalContrib,
+        years,
+        inflation,
+        cgt,
+        rate,
+    });
+}
+
+/* ────────────────────────────────────────
+   Render results into the right panel
+──────────────────────────────────────── */
+function renderResults(d) {
+    const panel = document.getElementById('results-panel');
+    const accentColor = ASSETS[currentAsset].color;
+    const gain = d.finalValue - d.totalContrib;
+    const gainPct = ((gain / d.totalContrib) * 100).toFixed(1);
+
+    panel.innerHTML = `
+      <!-- Summary cards -->
+      <div class="summary-cards">
+        <div class="summary-card highlight">
+          <div class="summary-card-label">Projected Value</div>
+          <div class="summary-card-value">${fmt(d.finalValue)}</div>
+          <div class="summary-card-sub">${fmtFull(d.finalValue)}${d.inflation ? ' (nominal)' : ''}</div>
+        </div>
+        <div class="summary-card neutral">
+          <div class="summary-card-label">Total Invested</div>
+          <div class="summary-card-value">${fmt(d.totalContrib)}</div>
+          <div class="summary-card-sub">${fmtFull(d.totalContrib)}</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-label">Total Growth</div>
+          <div class="summary-card-value gain">+${fmt(gain)}</div>
+          <div class="summary-card-sub">+${gainPct}% on invested capital</div>
+        </div>
+        ${d.inflation ? `
+        <div class="summary-card" style="grid-column:span 3;border-top-color:#805ad5;">
+          <div class="summary-card-label">Real Value (inflation-adjusted @2.5% p.a.)</div>
+          <div class="summary-card-value" style="color:#805ad5;">${fmtFull(d.realValue)}</div>
+          <div class="summary-card-sub">Purchasing power in today's money after ${d.years} years</div>
+        </div>` : ''}
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-panel">
+        <h3><i class="fas fa-chart-area" style="color:${accentColor};margin-right:0.4rem;"></i>Portfolio Growth Over ${d.years} Years</h3>
+        <div class="chart-container">
+          <canvas id="growthChart"></canvas>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:${accentColor};"></div>Portfolio Value</div>
+          <div class="legend-item"><div class="legend-dot" style="background:rgba(113,128,150,0.45);"></div>Total Contributed</div>
+          ${d.inflation ? `<div class="legend-item"><div class="legend-dot" style="background:#805ad5;opacity:0.7;"></div>Real Value</div>` : ''}
+        </div>
+      </div>
+
+      <!-- Year-by-year table -->
+      <div class="table-panel">
+        <h3><i class="fas fa-table" style="color:${accentColor};margin-right:0.4rem;"></i>Year-by-Year Breakdown</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Portfolio Value</th>
+                <th>Total Invested</th>
+                <th>Total Growth</th>
+                <th>Growth %</th>
+              </tr>
+            </thead>
+            <tbody id="year-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    // Build chart
+    const labels = Array.from({ length: d.years }, (_, i) => `Yr ${i + 1}`);
+    const datasets = [
+        {
+            label: 'Portfolio Value',
+            data: d.realYearly,
+            borderColor: accentColor,
+            backgroundColor: accentColor + '22',
+            fill: true,
+            tension: 0.35,
+            pointRadius: d.years <= 20 ? 3 : 0,
+            pointHoverRadius: 5,
+            borderWidth: 2.5,
+        },
+        {
+            label: 'Total Contributed',
+            data: d.contribYearly,
+            borderColor: 'rgba(113,128,150,0.7)',
+            backgroundColor: 'rgba(113,128,150,0.08)',
+            fill: true,
+            tension: 0.1,
+            pointRadius: 0,
+            borderWidth: 1.5,
+            borderDash: [5, 3],
+        },
+    ];
+
+    if (d.inflation) {
+        datasets.push({
+            label: 'Real Value',
+            data: d.realYearly.map((v, i) => v / Math.pow(1.025, i + 1)), // already adjusted once, just re-use realYearly
+            borderColor: '#805ad5',
+            backgroundColor: 'transparent',
+            fill: false,
+            tension: 0.35,
+            pointRadius: 0,
+            borderWidth: 2,
+            borderDash: [8, 4],
+        });
+    }
+
+    if (chartInstance) chartInstance.destroy();
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.dataset.label}: ${fmtFull(ctx.parsed.y)}`,
+                    },
+                    backgroundColor: '#1a365d',
+                    titleColor: '#fff',
+                    bodyColor: '#e2e8f0',
+                    padding: 10,
+                    cornerRadius: 8,
+                },
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 11 }, maxTicksLimit: 10 },
+                },
+                y: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: {
+                        font: { size: 11 },
+                        callback: v => fmt(v),
+                    },
+                },
+            },
+        },
+    });
+
+    // Build table (every year if ≤20, else every 5)
+    const tbody = document.getElementById('year-table-body');
+    const step  = d.years <= 20 ? 1 : 5;
+    let rows = '';
+    for (let i = step - 1; i < d.years; i += step) {
+        const pv    = d.realYearly[i];
+        const tc    = d.contribYearly[i];
+        const gr    = pv - tc;
+        const grPct = ((gr / tc) * 100).toFixed(1);
+        rows += `
+          <tr>
+            <td>Year ${i + 1}</td>
+            <td>${fmtFull(pv)}</td>
+            <td>${fmtFull(tc)}</td>
+            <td class="gain">+${fmtFull(Math.max(0, gr))}</td>
+            <td class="gain">+${grPct}%</td>
+          </tr>`;
+    }
+    tbody.innerHTML = rows;
+}
+
+/* ────────────────────────────────────────
+   Live update (re-calculate if results visible)
+──────────────────────────────────────── */
+function liveUpdate() {
+    if (document.getElementById('growthChart')) calculate();
+}
+
+/* ── init ── */
+document.getElementById('return').value        = ASSETS.stocks.return;
+document.getElementById('return-slider').value = ASSETS.stocks.return;
+</script>
+</body>
+</html>
