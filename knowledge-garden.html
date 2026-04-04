@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Knowledge Garden - Daniel King's Living Ideas Collection">
+    <meta name="author" content="Daniel King">
+    <title>Knowledge Garden | Daniel King</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           BASE — matches your existing site exactly
+        ====================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2c5282;
+            --accent-color: #3182ce;
+            --text-color: #2d3748;
+            --light-bg: #f7fafc;
+            --white: #ffffff;
+            --gray-200: #edf2f7;
+            --gray-600: #718096;
+            --gray-700: #4a5568;
+            --transition: all 0.3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.8;
+            background-color: var(--light-bg);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--primary-color);
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            font-family: 'Merriweather', serif;
+            text-decoration: none;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+
+        nav ul li a {
+            color: var(--white);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active { background-color: var(--secondary-color); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .page-header h1 { color: var(--white); font-size: 3rem; margin-bottom: 0.75rem; }
+        .page-header p { font-size: 1.15rem; opacity: 0.95; max-width: 620px; margin: 0 auto; line-height: 1.7; }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* =====================================================
+           TRANSITION BANNER
+        ====================================================== */
+        .transition-banner {
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 0.9rem 2rem;
+            text-align: center;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .transition-banner a {
+            color: #bee3f8;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           BETA BADGE & DISCLAIMER
+        ====================================================== */
+        .badge-row {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: white;
+            padding: 0.3rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        .disclaimer-card {
+            background: var(--white);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            padding: 1.1rem 1.5rem;
+            margin: 2rem 0 0.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .disclaimer-card i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .disclaimer-card p {
+            font-size: 0.88rem;
+            color: var(--gray-700);
+            line-height: 1.65;
+        }
+
+        .disclaimer-card p strong { color: var(--primary-color); }
+
+        .coming-soon-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--light-bg);
+            border: 1px solid var(--gray-200);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 0.2rem;
+        }
+
+        /* =====================================================
+           TAG FILTER BAR
+        ====================================================== */
+        .filter-bar {
+            background: var(--white);
+            padding: 1.1rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .filter-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 0.35rem 0.95rem;
+            background: var(--light-bg);
+            border: 2px solid var(--gray-200);
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover { background: var(--gray-200); }
+        .filter-btn.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+
+        .seed-count-label {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+        }
+
+        /* =====================================================
+           TWO-COLUMN LAYOUT
+        ====================================================== */
+        .garden-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+            padding: 2rem 0 4rem;
+            align-items: start;
+        }
+
+        /* =====================================================
+           SEEDS PANEL (left column)
+        ====================================================== */
+        .seeds-panel {
+            position: sticky;
+            top: 5.5rem;
+            max-height: calc(100vh - 8rem);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gray-200) transparent;
+        }
+
+        .seeds-panel::-webkit-scrollbar { width: 4px; }
+        .seeds-panel::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
+
+        /* Add seed button */
+        .add-seed-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem;
+            background: transparent;
+            border: 2px dashed var(--gray-200);
+            border-radius: 8px;
+            color: var(--gray-600);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 0.75rem;
+        }
+
+        .add-seed-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background: #EBF8FF;
+        }
+
+        /* Add seed form */
+        .add-seed-form {
+            display: none;
+            background: var(--white);
+            border: 1.5px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .add-seed-form.visible { display: block; }
+
+        .add-seed-form label {
+            display: block;
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .add-seed-form textarea {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 1.5px solid var(--gray-200);
+            border-radius: 6px;
+            font-family: 'Merriweather', serif;
+            font-size: 0.87rem;
+            font-style: italic;
+            line-height: 1.65;
+            color: var(--text-color);
+            resize: vertical;
+            margin-bottom: 0.75rem;
+        }
+
+        .add-seed-form textarea:focus {
+            outline: 2px solid var(--accent-color);
+            border-color: transparent;
+        }
+
+        .form-actions { display: flex; gap: 0.5rem; }
+
+        .btn-primary {
+            padding: 0.5rem 1.2rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover { background: var(--secondary-color); }
+
+        .btn-ghost {
+            padding: 0.5rem 1.2rem;
+            background: transparent;
+            color: var(--gray-600);
+            border: 1.5px solid var(--gray-200);
+            border-radius: 6px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-ghost:hover { border-color: var(--gray-600); }
+
+        /* Seed cards */
+        .seed-card {
+            background: var(--white);
+            border: 1.5px solid var(--gray-200);
+            border-left: 4px solid transparent;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .seed-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transform: translateX(4px);
+        }
+
+        .seed-card.active {
+            border-left: 4px solid var(--accent-color);
+            background: #EBF8FF;
+        }
+
+        .seed-quote {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            color: var(--text-color);
+            margin-bottom: 0.7rem;
+        }
+
+        .seed-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .seed-date { font-size: 0.73rem; color: var(--gray-600); }
+
+        .tag-group { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+
+        .seed-tag {
+            background: var(--light-bg);
+            color: var(--accent-color);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.12rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .seed-action {
+            font-size: 0.74rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           SYNTHESIS PANEL (right column)
+        ====================================================== */
+        .synthesis-panel { min-height: 420px; }
+
+        /* Empty state */
+        .empty-state {
+            background: var(--white);
+            border: 2px dashed var(--gray-200);
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            color: var(--gray-200);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .empty-state h3 {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin-bottom: 0.6rem;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            max-width: 380px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Seed quote block at top of synthesis */
+        .seed-display-quote {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .seed-display-quote p {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--text-color);
+        }
+
+        /* Synthesis header row */
+        .synthesis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .synthesis-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Synthesis card */
+        .synthesis-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.25rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+
+        .synthesis-para {
+            font-family: 'Merriweather', serif;
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.95;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .synthesis-para:last-of-type { margin-bottom: 0; }
+
+        /* Synthesis footer */
+        .synthesis-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.25rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .ai-note {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.77rem;
+            color: var(--gray-600);
+        }
+
+        .ai-note i { color: var(--accent-color); }
+
+        .live-soon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            background: var(--light-bg);
+            border: 1px solid var(--gray-200);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+        @media (max-width: 900px) {
+            .garden-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .seeds-panel {
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .page-header h1 { font-size: 2.2rem; }
+
+            nav .container { flex-direction: column; gap: 1rem; }
+            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV — "Blog" link changed to "Ideas", pointing here
+============================================================ -->
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo">Daniel King</a>
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="knowledge-garden.html" class="active">Ideas</a></li>
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ============================================================
+     TRANSITION BANNER — remove once blog is fully retired
+============================================================ -->
+<div class="transition-banner">
+    <i class="fas fa-seedling"></i>
+    <strong> This space is evolving.</strong>
+    The blog is being replaced by an interactive knowledge garden.
+    Previous articles remain available at <a href="blog-archive.html">blog-archive.html</a>.
+</div>
+
+<!-- ============================================================
+     PAGE HEADER
+============================================================ -->
+<div class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-seedling" style="font-size:2.2rem; opacity:0.8; margin-right:0.5rem;"></i> Knowledge Garden</h1>
+        <p>
+            A living collection of seeds — fragments, questions, and half-formed thoughts
+            — expanded by AI synthesis. Not finished essays. Working thinking.
+        </p>
+        <div class="badge-row">
+            <span class="badge"><i class="fas fa-flask"></i> Beta</span>
+            <span class="badge"><i class="fas fa-sync-alt"></i> Updated regularly</span>
+            <span class="badge"><i class="fas fa-robot"></i> AI-assisted synthesis</span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     DISCLAIMER
+============================================================ -->
+<div class="container">
+    <div class="disclaimer-card">
+        <i class="fas fa-info-circle"></i>
+        <p>
+            <strong>What this is:</strong>
+            These are my genuine notes and questions — fragments written while reading, teaching, or thinking.
+            The synthesis below each one was generated by Claude and reviewed by me before publishing.
+            I curate both the seeds and the direction of each expansion; the AI develops the idea in depth.
+            <span class="coming-soon-pill"><i class="fas fa-bolt"></i> Live generation</span> — where you can trigger real-time synthesis on demand — is coming soon once I have a secure backend in place.
+        </p>
+    </div>
+</div>
+
+<!-- ============================================================
+     TAG FILTER BAR
+============================================================ -->
+<div class="filter-bar">
+    <div class="inner">
+        <button class="filter-btn active" data-tag="all">All Seeds</button>
+        <button class="filter-btn" data-tag="AI">AI</button>
+        <button class="filter-btn" data-tag="Mathematics">Mathematics</button>
+        <button class="filter-btn" data-tag="Neuroscience">Neuroscience</button>
+        <button class="filter-btn" data-tag="Philosophy">Philosophy</button>
+        <button class="filter-btn" data-tag="Chemical Engineering">Chem. Eng.</button>
+        <span class="seed-count-label" id="seedCountLabel">6 seeds</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     MAIN LAYOUT
+============================================================ -->
+<div class="container">
+    <div class="garden-layout">
+
+        <!-- LEFT: Seeds panel -->
+        <aside class="seeds-panel">
+
+            <button class="add-seed-btn" id="addSeedBtn">
+                <i class="fas fa-plus-circle"></i> Plant a new seed
+            </button>
+
+            <div class="add-seed-form" id="addSeedForm">
+                <label>Your idea, question, or fragment</label>
+                <textarea id="newSeedText" rows="4"
+                    placeholder="e.g. I keep thinking about the relationship between…"></textarea>
+                <div class="form-actions">
+                    <button class="btn-primary" id="plantBtn">
+                        <i class="fas fa-seedling"></i> Plant seed
+                    </button>
+                    <button class="btn-ghost" id="cancelAddBtn">Cancel</button>
+                </div>
+            </div>
+
+            <div id="seedsList"></div>
+        </aside>
+
+        <!-- RIGHT: Synthesis panel -->
+        <main class="synthesis-panel" id="synthesisPanel">
+            <div class="empty-state">
+                <i class="fas fa-seedling"></i>
+                <h3>Select a seed to read its synthesis</h3>
+                <p>
+                    Click any seed on the left. Each one starts from a genuine fragment and
+                    is developed by AI — reviewed by me before it appears here.
+                </p>
+            </div>
+        </main>
+
+    </div>
+</div>
+
+<!-- ============================================================
+     FOOTER — identical to rest of site
+============================================================ -->
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Daniel King. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+
+// ---------------------------------------------------------------
+// SEED DATA
+// Add new seeds here. synthesis can be null if not yet written.
+// ---------------------------------------------------------------
+const SEEDS = [
+    {
+        id: 1,
+        text: "The concentration of measure phenomenon suggests that in high dimensions, random variables cluster tightly around their mean. What does this imply about the 'generalisation' we see in large language models? Are they generalising, or exploiting geometric inevitability?",
+        tags: ["AI", "Mathematics", "Probability"],
+        date: "March 2026",
+        synthesis: `The concentration of measure phenomenon offers a deeply uncomfortable challenge to how we typically frame generalisation in machine learning. When we say a model "generalises," we usually mean it has learned something structurally true about the data — some underlying pattern that applies beyond the training set. But in very high dimensions, certain statistical behaviours emerge with near-certainty regardless of the specific function being learned. Distances concentrate. Random projections preserve geometry. Functions become smoother than they have any right to be. It is worth asking whether some of what we call generalisation is really just high-dimensional inevitability.
+
+This does not make generalisation trivial or uninteresting, but it reframes the question. Rather than asking "how did this model learn to generalise?", we might ask "which of its behaviours were geometrically inevitable, and which required genuine learning?" A language model trained on enough text lives in a space where much of the variation in natural language is concentrated on a low-dimensional manifold — navigating that manifold may require real structural learning, while other aspects of performance may fall out of the geometry for free.
+
+The question this opens is whether our evaluation methods probe the right thing. If a model generalises well on a benchmark, is that evidence of learned structure, or of exploiting geometric properties of a high-dimensional space? Designing experiments that could distinguish these — that could catch a model that simply got lucky with the geometry — might be one of the more important open problems in empirical AI research right now.`
+    },
+    {
+        id: 2,
+        text: "Predictive coding in neuroscience — only errors propagate upward through the hierarchy. Is backpropagation secretly doing something similar? And if the brain doesn't use backprop, what does it use instead? The credit assignment problem might have a biological answer we haven't fully decoded.",
+        tags: ["Neuroscience", "AI"],
+        date: "March 2026",
+        synthesis: `Predictive coding and backpropagation share a deeper kinship than is usually acknowledged, which makes their differences all the more interesting. In predictive coding, only prediction errors travel upward — the brain is not broadcasting raw sensory data but rather the surprise, the residual, the thing that did not fit. Backpropagation does something superficially similar: it propagates error signals backward through the network. But the symmetry breaks immediately when you look closely. Backprop requires that the same weights used in the forward pass be transposed and reused in the backward pass — the so-called weight transport problem. Biological synapses have no known mechanism for this.
+
+This has driven a generation of research into more biologically plausible alternatives: feedback alignment, target propagation, predictive coding networks, equilibrium propagation. What is striking is that several of these achieve competitive performance despite abandoning exact gradient computation. The brain may be solving a looser version of the credit assignment problem — good enough rather than optimal — and achieving something that generalises more robustly as a result. There is a lesson here about whether exact gradient-based optimisation is a ceiling or a local trap.
+
+The question that remains is whether the brain's credit assignment solution is qualitatively different from gradient descent, or merely a noisy, localised approximation of it. If the former, there may be genuinely different computational principles to discover — ones that might handle continual learning and energy efficiency far better than standard backprop. If the latter, the interesting question shifts to why those approximations work so well, and what they buy in robustness that standard training sacrifices.`
+    },
+    {
+        id: 3,
+        text: "SDEs make uncertainty a first-class citizen in reactor modelling. Could the same philosophy apply to neural network training — treating noise not as a nuisance but as load-bearing structure? Langevin dynamics suggests yes.",
+        tags: ["Chemical Engineering", "Mathematics", "AI"],
+        date: "February 2026",
+        synthesis: `In reactor design, the shift from deterministic to stochastic modelling is not merely a technical refinement — it is a philosophical one. Deterministic models treat parameters as known and disturbances as failures of idealisation. Stochastic differential equations treat uncertainty as fundamental: it is not that the system would be well-behaved if we knew more, but that variability is intrinsic to the physics and must be modelled as such. The payoff is significant. Systems near phase transitions or instability boundaries — precisely the conditions where reactors operate for efficiency — are only honestly described in probabilistic terms.
+
+Neural network training makes a parallel move when viewed through the lens of Langevin dynamics. Stochastic gradient descent is not simply gradient descent with inconvenient noise added — the noise actively shapes where the optimiser ends up. It preferentially escapes sharp minima (which generalise poorly) in favour of wide, flat ones (which generalise well). This is not a side effect; it is load-bearing. The SDE framework from reactor modelling and the SDE framework for optimisation are, formally, the same mathematics being exploited for the same reason: controlled randomness is more useful than idealised determinism.
+
+What this opens is a design question rather than just an analysis question. If noise is structure, then the right question is not "how do we reduce variance in training?" but "what is the optimal noise schedule for a given architecture and dataset?" This connects to simulated annealing, to the statistical mechanics of disordered systems, and ultimately to questions about the geometry of loss landscapes that we still do not fully understand.`
+    },
+    {
+        id: 4,
+        text: "Searle's Chinese Room assumes syntax and semantics are separable. But what if sufficient syntactic complexity gives rise to semantic grounding through sheer relational density? There's a phase transition argument lurking here.",
+        tags: ["Philosophy", "AI"],
+        date: "January 2026",
+        synthesis: `The Chinese Room argument is most powerful when read as a claim about levels of description. Searle's insistence that the person in the room lacks understanding even while the system produces correct Chinese outputs relies on a view that semantics — genuine aboutness, intentionality, meaning — is not reducible to syntax and cannot emerge from it. The physical symbol manipulation has no semantic content, full stop. But this is precisely where the argument invites challenge: it treats the relationship between syntax and semantics as a simple binary rather than as a function of scale and relational structure.
+
+The phase transition intuition is this: below some threshold of relational complexity, symbol systems are indeed purely syntactic. But above some threshold, the density and consistency of relations between symbols may become sufficient to constitute a form of semantic grounding that is not reducible to any individual manipulation step. The system as a whole refers, even if no component does. This maps onto what we observe empirically in large language models — the emergence of what looks like semantic competence at scale, without any individual parameter being interpretable as "containing meaning."
+
+The deeper question is whether this matters morally and epistemically, or only instrumentally. A phase transition in behavioural competence does not automatically imply a phase transition in consciousness or genuine understanding. Dennett would say the distinction collapses; Searle would say it does not. What I find most useful is sitting with the discomfort: we do not currently have the tools to distinguish "semantic competence that emerged from syntactic complexity" from "genuine understanding." That gap is not a rhetorical position — it is an open empirical and philosophical problem.`
+    },
+    {
+        id: 5,
+        text: "BJJ feels like doing mathematics. Both involve finding invariants under continuous transformation — the body as a geometric object being acted on by the opponent's group actions. Leverage is a conservation law. Submission is proof by contradiction.",
+        tags: ["Mathematics", "Philosophy"],
+        date: "January 2026",
+        synthesis: `The analogy is deeper than it first appears, and it survives contact with the formal machinery. In both mathematics and jiu-jitsu, the practitioner is searching for invariants — properties preserved under the transformations an adversary (or a proof) can apply. A mathematician looking for a fixed point under a continuous map is doing something structurally similar to a grappler maintaining base under a sweep attempt: identifying what cannot be changed given the constraints of the situation, and working from there. The body in BJJ is not static; it is a configuration space, and the roll is a trajectory through it.
+
+Leverage as a conservation law is particularly apt. Mechanical advantage means that force is redistributed rather than created — the same way that algebraic manipulation in a proof preserves truth value while changing the form of an expression. You cannot create information you do not have, and you cannot create force you do not have; you can only redistribute and redirect. A choke that works by restricting blood flow exploits a biological invariant — the nervous system's hard-coded response to carotid compression — in the same way that a proof by contradiction exploits the logical invariant that a statement cannot be both true and false.
+
+What I find philosophically interesting about this analogy is what it suggests about embodied knowledge. The invariants in BJJ are learned through thousands of repetitions of physical transformation — the body learns the topology before the mind articulates it. This is a form of mathematical understanding that bypasses propositional language entirely. It raises a question I keep returning to: is there a class of mathematical truths that are better understood through motor memory than through symbolic manipulation? And if so, what does that mean for how we teach mathematics?`
+    },
+    {
+        id: 6,
+        text: "SAFT equation of state: thermodynamic properties emerge from molecular geometry and association. Can we derive something analogous for semantic 'associations' in embedding spaces? Information geometry might be the bridge.",
+        tags: ["Chemical Engineering", "AI", "Mathematics"],
+        date: "December 2025",
+        synthesis: `SAFT — Statistical Associating Fluid Theory — is a beautiful piece of applied statistical mechanics. It works by treating molecules not as featureless spheres but as geometric objects with specific bonding sites: a chain length, a number of association sites, an energy of association. Macroscopic thermodynamic properties then emerge from these microscopic descriptors through a well-defined theoretical apparatus. What makes it powerful is that the geometric parameters are physically interpretable — you can relate them to molecular structure — while remaining computationally tractable for engineering prediction.
+
+The question of whether something analogous exists for word embeddings is not idle. An embedding vector is, in some sense, a geometric descriptor of a word's "association sites" — its pattern of relationships with other words across the training corpus. Cosine similarity is a crude measure of association energy. The geometry of the embedding space carries information about which words bond, how strongly, and in what configurations. Information geometry — the study of the geometry induced on probability distributions — offers a more principled framework for this than raw Euclidean distance. The Fisher information metric captures something closer to semantic distinguishability than cosine distance does.
+
+The bridge I am looking for would be a theory that lets you read off macroscopic semantic properties — analogues of compressibility, heat capacity, phase boundaries — from microscopic geometric parameters of the embedding space. SAFT's success with fluids suggests this is not inherently impossible: complex emergent behaviour can be derived from a small number of geometric descriptors, provided the theoretical framework is right. Whether information geometry is that framework, or whether something else is needed, I genuinely do not know. But the analogy feels generative enough to follow.`
+    }
+];
+
+// ---------------------------------------------------------------
+// STATE
+// ---------------------------------------------------------------
+let activeSeedId = null;
+let activeTag = 'all';
+let userSeeds = [];
+
+function getAllSeeds() {
+    return [...userSeeds, ...SEEDS];
+}
+
+// ---------------------------------------------------------------
+// RENDER SEEDS LIST
+// ---------------------------------------------------------------
+function renderSeeds() {
+    const all = getAllSeeds();
+    const filtered = activeTag === 'all'
+        ? all
+        : all.filter(s => s.tags.includes(activeTag));
+
+    document.getElementById('seedCountLabel').textContent =
+        `${filtered.length} seed${filtered.length !== 1 ? 's' : ''}`;
+
+    const list = document.getElementById('seedsList');
+    list.innerHTML = '';
+
+    filtered.forEach(seed => {
+        const card = document.createElement('div');
+        card.className = 'seed-card' + (seed.id === activeSeedId ? ' active' : '');
+        card.dataset.id = seed.id;
+
+        const preview = seed.text.length > 160
+            ? seed.text.slice(0, 160) + '…'
+            : seed.text;
+
+        card.innerHTML = `
+            <p class="seed-quote">"${preview}"</p>
+            <div class="seed-meta">
+                <span class="seed-date"><i class="far fa-calendar" style="margin-right:0.3rem;"></i>${seed.date}</span>
+                <div class="tag-group">
+                    ${seed.tags.map(t => `<span class="seed-tag">${t}</span>`).join('')}
+                </div>
+            </div>
+            <p class="seed-action">
+                ${seed.id === activeSeedId
+                    ? '<i class="fas fa-circle" style="font-size:0.6rem;margin-right:0.3rem;"></i> Viewing'
+                    : 'Read synthesis <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>'}
+            </p>
+        `;
+
+        card.addEventListener('click', () => showSynthesis(seed));
+        list.appendChild(card);
+    });
+}
+
+// ---------------------------------------------------------------
+// SHOW SYNTHESIS
+// ---------------------------------------------------------------
+function showSynthesis(seed) {
+    activeSeedId = seed.id;
+    renderSeeds();
+
+    const panel = document.getElementById('synthesisPanel');
+    const tagsHTML = seed.tags.map(t => `<span class="seed-tag">${t}</span>`).join('');
+
+    let bodyHTML;
+    if (seed.synthesis) {
+        bodyHTML = seed.synthesis
+            .split('\n\n')
+            .filter(Boolean)
+            .map(p => `<p class="synthesis-para">${p}</p>`)
+            .join('');
+    } else {
+        bodyHTML = `<p class="synthesis-para" style="color:var(--gray-600); font-style:italic;">
+            Synthesis for this seed is being written. Check back soon.
+        </p>`;
+    }
+
+    panel.innerHTML = `
+        <div class="seed-display-quote">
+            <p>"${seed.text}"</p>
+        </div>
+
+        <div class="synthesis-header">
+            <div class="synthesis-label">
+                <i class="fas fa-robot"></i> AI Synthesis
+            </div>
+            <div class="tag-group">${tagsHTML}</div>
+        </div>
+
+        <div class="synthesis-card">
+            ${bodyHTML}
+            <div class="synthesis-footer">
+                <div class="ai-note">
+                    <i class="fas fa-info-circle"></i>
+                    Generated by Claude · Reviewed by Daniel King · ${seed.date}
+                </div>
+                <span class="live-soon">
+                    <i class="fas fa-bolt"></i> Live generation coming soon
+                </span>
+            </div>
+        </div>
+    `;
+
+    if (window.innerWidth < 900) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// ---------------------------------------------------------------
+// TAG FILTER
+// ---------------------------------------------------------------
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeTag = this.dataset.tag;
+        renderSeeds();
+    });
+});
+
+// ---------------------------------------------------------------
+// ADD SEED FORM
+// ---------------------------------------------------------------
+document.getElementById('addSeedBtn').addEventListener('click', () => {
+    document.getElementById('addSeedForm').classList.add('visible');
+    document.getElementById('addSeedBtn').style.display = 'none';
+    document.getElementById('newSeedText').focus();
+});
+
+document.getElementById('cancelAddBtn').addEventListener('click', () => {
+    document.getElementById('addSeedForm').classList.remove('visible');
+    document.getElementById('addSeedBtn').style.display = 'flex';
+    document.getElementById('newSeedText').value = '';
+});
+
+document.getElementById('plantBtn').addEventListener('click', () => {
+    const text = document.getElementById('newSeedText').value.trim();
+    if (!text) return;
+
+    const newSeed = {
+        id: Date.now(),
+        text,
+        tags: ['Personal'],
+        date: new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }),
+        synthesis: null
+    };
+
+    userSeeds.unshift(newSeed);
+    document.getElementById('newSeedText').value = '';
+    document.getElementById('addSeedForm').classList.remove('visible');
+    document.getElementById('addSeedBtn').style.display = 'flex';
+    renderSeeds();
+    showSynthesis(newSeed);
+});
+
+// ---------------------------------------------------------------
+// INIT
+// ---------------------------------------------------------------
+renderSeeds();
+
+/*
+ * ============================================================
+ * LIVE AI SYNTHESIS — HOW TO ENABLE
+ * ============================================================
+ *
+ * To enable real-time synthesis, you need a small backend that
+ * holds your Anthropic API key securely. The simplest option:
+ *
+ * 1. Create a Vercel account (free) at vercel.com
+ * 2. Create a file: api/synthesise.js in your project
+ * 3. Deploy — Vercel gives you an endpoint like:
+ *    https://your-site.vercel.app/api/synthesise
+ *
+ * Then replace the static synthesis fields above with:
+ *
+ *   async function fetchLiveSynthesis(seedText) {
+ *       const res = await fetch('/api/synthesise', {
+ *           method: 'POST',
+ *           headers: { 'Content-Type': 'application/json' },
+ *           body: JSON.stringify({ seed: seedText })
+ *       });
+ *       const data = await res.json();
+ *       return data.synthesis;
+ *   }
+ *
+ * The Vercel function (api/synthesise.js) then calls:
+ * https://api.anthropic.com/v1/messages with your key stored
+ * as a Vercel environment variable — never exposed to the browser.
+ * ============================================================
+ */
+</script>
+
+</body>
+</html>
