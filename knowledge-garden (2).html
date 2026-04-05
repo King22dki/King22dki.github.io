@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Knowledge Garden — Daniel King's living collection of questions and ideas">
+    <meta name="author" content="Daniel King">
+    <title>Knowledge Garden | Daniel King</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink:        #0D1B2A;
+            --ink-mid:    #1E3448;
+            --copper:     #B5651D;
+            --copper-lt:  #D4844A;
+            --copper-bg:  #FDF0E6;
+            --parchment:  #F8F4EF;
+            --paper:      #FDFAF7;
+            --paper-2:    #F2EDE6;
+            --border:     #E2D9CF;
+            --border-mid: #C8BFB3;
+            --muted:      #8A7E74;
+            --muted-lt:   #B0A499;
+            --text:       #2A1F18;
+            --text-mid:   #4A3F36;
+            --ease:       all 0.22s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--parchment);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        a { color: var(--copper); text-decoration: none; transition: var(--ease); }
+        a:hover { color: var(--copper-lt); }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--ink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 3.75rem;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: var(--paper);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background: var(--copper);
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+            position: relative; top: -2px;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 0.2rem; }
+
+        nav ul li a {
+            display: block;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.85rem;
+            border-radius: 4px;
+            transition: var(--ease);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover { color: white; background: rgba(255,255,255,0.07); }
+        nav ul li a.active { color: var(--copper-lt); background: rgba(181,101,29,0.12); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--ink);
+            padding: 4.5rem 0 3.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .page-header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+        }
+
+        .header-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--copper-lt);
+            margin-bottom: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-kicker::after {
+            content: '';
+            width: 50px; height: 1px;
+            background: var(--copper);
+            opacity: 0.5;
+        }
+
+        .page-header h1 {
+            color: var(--paper);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            line-height: 1.12;
+        }
+
+        .page-header h1 em { font-style: italic; color: var(--copper-lt); }
+
+        .header-desc {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.48);
+            max-width: 500px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .header-pills {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.32);
+            border: 1px solid rgba(255,255,255,0.09);
+            padding: 0.28rem 0.7rem;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .header-pill i { color: var(--copper); opacity: 0.7; }
+
+        /* ── DISCLAIMER ── */
+        .disclaimer-strip {
+            background: var(--copper-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0.85rem 0;
+        }
+
+        .disclaimer-strip .inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.82rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .disclaimer-strip i { color: var(--copper); flex-shrink: 0; margin-top: 0.1rem; }
+        .disclaimer-strip strong { color: var(--ink); }
+
+        /* ── STORAGE TOOLBAR ── */
+        .storage-toolbar {
+            background: var(--paper);
+            border-bottom: 1px solid var(--border);
+            padding: 0.65rem 0;
+        }
+
+        .storage-toolbar .inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .storage-info {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+            flex: 1;
+        }
+
+        .storage-info b { color: var(--copper); font-weight: 500; }
+
+        .toolbar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.73rem;
+            font-weight: 500;
+            padding: 0.32rem 0.8rem;
+            border-radius: 4px;
+            border: 1.5px solid var(--border-mid);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: var(--ease);
+        }
+
+        .toolbar-btn:hover { border-color: var(--copper); color: var(--copper); }
+
+        /* ── TAG FILTER ── */
+        .filter-bar {
+            background: var(--paper);
+            border-bottom: 1px solid var(--border);
+            padding: 0.7rem 0;
+        }
+
+        .filter-bar .inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            gap: 0.38rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.05em;
+            padding: 0.26rem 0.72rem;
+            border-radius: 20px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: var(--ease);
+        }
+
+        .filter-chip:hover { border-color: var(--border-mid); color: var(--text-mid); }
+        .filter-chip.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+        .seed-count {
+            margin-left: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            color: var(--muted-lt);
+            letter-spacing: 0.05em;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .main-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem 5rem;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* ── SEEDS PANEL ── */
+        .seeds-panel {
+            position: sticky;
+            top: 4.5rem;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .seeds-panel::-webkit-scrollbar { width: 3px; }
+        .seeds-panel::-webkit-scrollbar-thumb { background: var(--border); }
+
+        .plant-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.85rem;
+            background: transparent;
+            border: 1.5px dashed var(--border-mid);
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            transition: var(--ease);
+            margin-bottom: 0.9rem;
+        }
+
+        .plant-trigger:hover {
+            border-color: var(--copper);
+            color: var(--copper);
+            background: var(--copper-bg);
+        }
+
+        /* Seed form */
+        .seed-form {
+            display: none;
+            background: var(--paper);
+            border: 1.5px solid var(--copper);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 0.9rem;
+            animation: slideDown 0.18s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .seed-form.open { display: block; }
+
+        .seed-form label {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .seed-form textarea {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            background: var(--parchment);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text);
+            resize: vertical;
+            margin-bottom: 0.5rem;
+            transition: var(--ease);
+        }
+
+        .seed-form textarea:focus {
+            outline: none;
+            border-color: var(--copper);
+            background: var(--paper);
+        }
+
+        .seed-form textarea::placeholder { color: var(--muted-lt); }
+
+        .tag-input {
+            width: 100%;
+            padding: 0.45rem 0.75rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            background: var(--parchment);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-mid);
+            margin-bottom: 0.75rem;
+            transition: var(--ease);
+        }
+
+        .tag-input:focus { outline: none; border-color: var(--copper); }
+        .tag-input::placeholder { color: var(--muted-lt); }
+
+        .form-actions { display: flex; gap: 0.45rem; }
+
+        .btn-plant {
+            flex: 1;
+            padding: 0.52rem;
+            background: var(--ink);
+            color: var(--paper);
+            border: none;
+            border-radius: 5px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--ease);
+        }
+
+        .btn-plant:hover { background: var(--ink-mid); }
+
+        .btn-cancel {
+            padding: 0.52rem 0.85rem;
+            background: transparent;
+            color: var(--muted);
+            border: 1.5px solid var(--border);
+            border-radius: 5px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--ease);
+        }
+
+        .btn-cancel:hover { border-color: var(--border-mid); color: var(--text-mid); }
+
+        /* Empty seeds state */
+        .seeds-empty {
+            text-align: center;
+            padding: 2.25rem 1rem;
+            border: 1.5px dashed var(--border);
+            border-radius: 8px;
+        }
+
+        .seeds-empty i {
+            font-size: 1.6rem;
+            color: var(--border-mid);
+            margin-bottom: 0.65rem;
+            display: block;
+        }
+
+        .seeds-empty p {
+            font-size: 0.83rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* Seed cards */
+        .seed-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-left: 3px solid transparent;
+            border-radius: 6px;
+            padding: 1.05rem 1.1rem 0.8rem;
+            margin-bottom: 0.55rem;
+            cursor: pointer;
+            transition: var(--ease);
+            position: relative;
+        }
+
+        .seed-card:hover {
+            border-color: var(--copper);
+            border-left-color: var(--copper);
+            box-shadow: 0 3px 14px rgba(181,101,29,0.07);
+            transform: translateX(3px);
+        }
+
+        .seed-card.active {
+            border-left-color: var(--copper);
+            background: var(--copper-bg);
+        }
+
+        .seed-delete {
+            position: absolute;
+            top: 0.55rem; right: 0.55rem;
+            width: 20px; height: 20px;
+            display: flex; align-items: center; justify-content: center;
+            border: none;
+            background: transparent;
+            color: var(--muted-lt);
+            font-size: 0.65rem;
+            border-radius: 3px;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--ease);
+        }
+
+        .seed-card:hover .seed-delete { opacity: 1; }
+        .seed-delete:hover { background: #FDE8E8; color: #C53030; }
+
+        .seed-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.91rem;
+            line-height: 1.58;
+            color: var(--text);
+            margin-bottom: 0.6rem;
+            padding-right: 1.1rem;
+        }
+
+        .seed-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.42rem;
+        }
+
+        .seed-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--muted-lt);
+            letter-spacing: 0.04em;
+        }
+
+        .seed-tags { display: flex; gap: 0.28rem; flex-wrap: wrap; }
+
+        .seed-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--copper);
+            background: rgba(181,101,29,0.08);
+            border: 1px solid rgba(181,101,29,0.18);
+            padding: 0.09rem 0.4rem;
+            border-radius: 3px;
+            letter-spacing: 0.03em;
+        }
+
+        .seed-cta {
+            font-size: 0.7rem;
+            color: var(--copper);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.22rem;
+        }
+
+        /* ── SYNTHESIS PANEL ── */
+        .synthesis-panel { min-height: 480px; }
+
+        .synth-empty {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .synth-empty-glyph {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            color: var(--border);
+            line-height: 1;
+            margin-bottom: 1.1rem;
+        }
+
+        .synth-empty h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--muted);
+            margin-bottom: 0.55rem;
+        }
+
+        .synth-empty p {
+            font-size: 0.86rem;
+            color: var(--muted-lt);
+            max-width: 340px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Quote block */
+        .synth-quote-block {
+            background: var(--ink);
+            border-radius: 8px 8px 0 0;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synth-quote-block::before {
+            content: '\201C';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 9rem;
+            color: rgba(255,255,255,0.04);
+            position: absolute;
+            top: -2rem; left: 0.8rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .synth-quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.22rem;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.88);
+            position: relative;
+        }
+
+        .synth-quote-meta {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .synth-quote-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 0.06em;
+        }
+
+        .synth-quote-tags { display: flex; gap: 0.32rem; flex-wrap: wrap; }
+
+        .synth-quote-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--copper-lt);
+            border: 1px solid rgba(181,101,29,0.38);
+            padding: 0.09rem 0.42rem;
+            border-radius: 3px;
+            letter-spacing: 0.03em;
+        }
+
+        /* Synthesis card */
+        .synth-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2.25rem 2.5rem;
+        }
+
+        .synth-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .synth-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--copper);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .synth-label.dim { color: var(--muted-lt); }
+
+        /* Synthesis body */
+        .synth-body { animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .synth-para {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.95;
+            color: var(--text);
+            margin-bottom: 1.6rem;
+        }
+
+        .synth-para:last-of-type { margin-bottom: 0; }
+
+        /* Pending */
+        .synth-pending {
+            background: var(--paper-2);
+            border: 1px dashed var(--border-mid);
+            border-radius: 6px;
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .synth-pending p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .synth-pending small {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted-lt);
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        .synth-footer {
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .synth-note {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--muted-lt);
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 0.38rem;
+        }
+
+        .synth-note i { color: var(--copper); opacity: 0.6; }
+
+        .coming-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 0.18rem 0.52rem;
+            border-radius: 3px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.3);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 960px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 1.5rem 1.25rem 4rem;
+            }
+            .seeds-panel { position: static; max-height: none; }
+            .nav-inner { padding: 0.7rem 1.25rem; height: auto; flex-wrap: wrap; gap: 0.5rem; }
+            nav ul li a { font-size: 0.72rem; padding: 0.38rem 0.6rem; }
+            .page-header h1 { font-size: 2.1rem; }
+            .storage-toolbar .inner, .filter-bar .inner,
+            .disclaimer-strip .inner, .page-header-inner { padding: 0 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Daniel King<span></span></a>
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="knowledge-garden.html" class="active">Ideas</a></li>
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-header">
+    <div class="page-header-inner">
+        <p class="header-kicker"><i class="fas fa-seedling"></i> Knowledge Garden &nbsp;·&nbsp; Beta</p>
+        <h1>Questions worth<br><em>sitting with</em></h1>
+        <p class="header-desc">
+            A living collection of my own questions, fragments, and half-formed ideas —
+            expanded through AI synthesis. Working thinking, not finished essays.
+        </p>
+        <div class="header-pills">
+            <span class="header-pill"><i class="fas fa-lock"></i> Stored locally in your browser</span>
+            <span class="header-pill"><i class="fas fa-robot"></i> AI-assisted synthesis</span>
+            <span class="header-pill"><i class="fas fa-sync-alt"></i> Updated as I think</span>
+        </div>
+    </div>
+</div>
+
+<div class="disclaimer-strip">
+    <div class="inner">
+        <i class="fas fa-info-circle"></i>
+        <p>
+            <strong>What this is:</strong>
+            These are questions I genuinely have — things I've been turning over while reading, teaching, or training.
+            The synthesis beneath each one is generated by Claude using that question as the seed, then reviewed and approved by me before it appears here.
+            <strong>Live generation</strong> — real-time AI synthesis triggered directly from the page — is coming once I have a secure backend in place.
+        </p>
+    </div>
+</div>
+
+<div class="storage-toolbar">
+    <div class="inner">
+        <p class="storage-info">
+            <i class="fas fa-database" style="margin-right:0.4rem;"></i>
+            <b id="storageSeedCount">0</b> seeds · stored in localStorage · private · device-specific
+        </p>
+        <button class="toolbar-btn" onclick="exportSeeds()">
+            <i class="fas fa-download"></i> Export JSON
+        </button>
+        <label class="toolbar-btn" style="cursor:pointer;">
+            <i class="fas fa-upload"></i> Import
+            <input type="file" accept=".json" id="importInput" style="display:none;" onchange="importSeeds(event)">
+        </label>
+        <button class="toolbar-btn" onclick="if(confirm('Clear all seeds? This cannot be undone.')) clearAllSeeds()">
+            <i class="fas fa-trash-alt"></i> Clear all
+        </button>
+    </div>
+</div>
+
+<div class="filter-bar">
+    <div class="inner" id="filterBar">
+        <button class="filter-chip active" data-tag="all">All</button>
+        <span class="seed-count" id="seedCountLabel">0 seeds</span>
+    </div>
+</div>
+
+<div class="main-wrap">
+    <aside class="seeds-panel">
+        <button class="plant-trigger" id="plantTrigger">
+            <i class="fas fa-plus-circle"></i> Plant a question or idea
+        </button>
+
+        <div class="seed-form" id="seedForm">
+            <label>Your question or fragment</label>
+            <textarea id="seedText" rows="4"
+                placeholder="What is it I can't stop thinking about?"></textarea>
+            <input class="tag-input" type="text" id="seedTagsInput"
+                placeholder="Tags: Mathematics, AI, Philosophy … (comma-separated, optional)">
+            <div class="form-actions">
+                <button class="btn-plant" id="plantBtn">
+                    <i class="fas fa-seedling"></i> Plant seed
+                </button>
+                <button class="btn-cancel" id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+
+        <div id="seedsList"></div>
+    </aside>
+
+    <main class="synthesis-panel" id="synthesisPanel">
+        <div class="synth-empty">
+            <div class="synth-empty-glyph">?</div>
+            <h3>Plant your first question</h3>
+            <p>
+                Use the form on the left to add a question you're genuinely sitting with.
+                Select any seed to read its synthesis.
+            </p>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2026 Daniel King &nbsp;·&nbsp; All rights reserved</p>
+</footer>
+
+<script>
+// ── STORAGE ──────────────────────────────────────────────────
+const STORE_KEY = 'dk_garden_seeds_v1';
+const SYNTH_KEY = 'dk_garden_synths_v1';
+
+function loadSeeds()  { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; } }
+function saveSeeds(s) { localStorage.setItem(STORE_KEY, JSON.stringify(s)); updateCount(s.length); }
+function loadSynths() { try { return JSON.parse(localStorage.getItem(SYNTH_KEY)) || {}; } catch { return {}; } }
+function saveSynths(s){ localStorage.setItem(SYNTH_KEY, JSON.stringify(s)); }
+function updateCount(n){ document.getElementById('storageSeedCount').textContent = n; }
+
+// ── STATE ─────────────────────────────────────────────────────
+let seeds    = loadSeeds();
+let synths   = loadSynths();
+let activeId = null;
+let activeTag= 'all';
+
+// ── RENDER ────────────────────────────────────────────────────
+function allTags() {
+    const t = new Set();
+    seeds.forEach(s => (s.tags||[]).forEach(tag => t.add(tag)));
+    return [...t].sort();
+}
+
+function renderFilterBar() {
+    const bar   = document.getElementById('filterBar');
+    const label = document.getElementById('seedCountLabel');
+    bar.querySelectorAll('[data-dynamic]').forEach(el => el.remove());
+
+    allTags().forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-chip' + (activeTag === tag ? ' active' : '');
+        btn.dataset.tag     = tag;
+        btn.dataset.dynamic = '1';
+        btn.textContent     = tag;
+        btn.addEventListener('click', () => { activeTag = tag; renderAll(); });
+        bar.insertBefore(btn, label);
+    });
+
+    bar.querySelectorAll('.filter-chip').forEach(btn =>
+        btn.classList.toggle('active', btn.dataset.tag === activeTag));
+}
+
+function filtered() {
+    return activeTag === 'all' ? seeds : seeds.filter(s => (s.tags||[]).includes(activeTag));
+}
+
+function renderSeeds() {
+    const list    = document.getElementById('seedsList');
+    const visible = filtered();
+
+    document.getElementById('seedCountLabel').textContent =
+        `${visible.length} seed${visible.length !== 1 ? 's' : ''}`;
+
+    list.innerHTML = '';
+
+    if (!visible.length) {
+        list.innerHTML = `<div class="seeds-empty">
+            <i class="fas fa-${seeds.length ? 'filter' : 'seedling'}"></i>
+            <p>${seeds.length ? 'No seeds match this tag.' : 'No seeds yet. Plant your first question above.'}</p>
+        </div>`;
+        return;
+    }
+
+    visible.forEach(seed => {
+        const preview = seed.text.length > 155
+            ? seed.text.slice(0, 155) + '…' : seed.text;
+
+        const card = document.createElement('div');
+        card.className = 'seed-card' + (seed.id === activeId ? ' active' : '');
+
+        card.innerHTML = `
+            <button class="seed-delete" data-id="${seed.id}" title="Delete">
+                <i class="fas fa-times"></i>
+            </button>
+            <p class="seed-text">"${preview}"</p>
+            <div class="seed-footer">
+                <span class="seed-date">${seed.date}</span>
+                <div class="seed-tags">
+                    ${(seed.tags||[]).map(t=>`<span class="seed-tag">${t}</span>`).join('')}
+                </div>
+            </div>
+            <p class="seed-cta" style="margin-top:0.45rem;">
+                ${seed.id === activeId
+                    ? '<i class="fas fa-circle" style="font-size:0.45rem;"></i>&nbsp;Viewing'
+                    : 'Read synthesis&nbsp;<i class="fas fa-arrow-right" style="font-size:0.6rem;"></i>'}
+            </p>`;
+
+        card.querySelector('.seed-delete').addEventListener('click', e => {
+            e.stopPropagation(); deleteSeed(seed.id);
+        });
+        card.addEventListener('click', () => showSynthesis(seed));
+        list.appendChild(card);
+    });
+}
+
+function renderAll() { renderFilterBar(); renderSeeds(); updateCount(seeds.length); }
+
+// ── SHOW SYNTHESIS ────────────────────────────────────────────
+function showSynthesis(seed) {
+    activeId = seed.id;
+    renderSeeds();
+
+    const panel    = document.getElementById('synthesisPanel');
+    const tagsHTML = (seed.tags||[]).map(t=>`<span class="synth-quote-tag">${t}</span>`).join('');
+    const cached   = synths[seed.id] || null;
+
+    let bodyHTML;
+    if (cached) {
+        bodyHTML = `<div class="synth-body">
+            ${cached.split('\n\n').filter(Boolean).map(p=>`<p class="synth-para">${p}</p>`).join('')}
+            <div class="synth-footer">
+                <div class="synth-note">
+                    <i class="fas fa-robot"></i>
+                    Generated by Claude &nbsp;·&nbsp; Reviewed by Daniel King
+                </div>
+                <span class="coming-pill">⚡ Live generation coming soon</span>
+            </div>
+        </div>`;
+    } else {
+        bodyHTML = `<div class="synth-pending">
+            <p>No synthesis written for this question yet.</p>
+            <small>LIVE GENERATION COMING SOON &nbsp;·&nbsp; CHECK BACK AFTER REVIEW</small>
+        </div>`;
+    }
+
+    panel.innerHTML = `
+        <div class="synth-quote-block">
+            <p class="synth-quote-text">${seed.text}</p>
+            <div class="synth-quote-meta">
+                <span class="synth-quote-date">${seed.date}</span>
+                <div class="synth-quote-tags">${tagsHTML}</div>
+            </div>
+        </div>
+        <div class="synth-card">
+            <div class="synth-header-row">
+                <div class="synth-label"><i class="fas fa-robot"></i> AI Synthesis</div>
+                <div class="synth-label dim"><i class="fas fa-user"></i> Curated by Daniel King</div>
+            </div>
+            ${bodyHTML}
+        </div>`;
+
+    if (window.innerWidth < 960)
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── ADD SEED ──────────────────────────────────────────────────
+document.getElementById('plantTrigger').addEventListener('click', () => {
+    document.getElementById('seedForm').classList.add('open');
+    document.getElementById('plantTrigger').style.display = 'none';
+    document.getElementById('seedText').focus();
+});
+
+document.getElementById('cancelBtn').addEventListener('click', closeSeedForm);
+
+document.getElementById('plantBtn').addEventListener('click', () => {
+    const text = document.getElementById('seedText').value.trim();
+    if (!text) { document.getElementById('seedText').focus(); return; }
+
+    const rawTags = document.getElementById('seedTagsInput').value;
+    const tags    = rawTags ? rawTags.split(',').map(t=>t.trim()).filter(Boolean) : [];
+
+    const newSeed = {
+        id:   Date.now().toString(),
+        text, tags,
+        date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' })
+    };
+
+    seeds.unshift(newSeed);
+    saveSeeds(seeds);
+    closeSeedForm();
+    renderAll();
+    showSynthesis(newSeed);
+});
+
+function closeSeedForm() {
+    document.getElementById('seedForm').classList.remove('open');
+    document.getElementById('plantTrigger').style.display = '';
+    document.getElementById('seedText').value = '';
+    document.getElementById('seedTagsInput').value = '';
+}
+
+// ── DELETE ────────────────────────────────────────────────────
+function deleteSeed(id) {
+    if (!confirm('Remove this seed?')) return;
+    seeds = seeds.filter(s => s.id !== id);
+    saveSeeds(seeds);
+    delete synths[id]; saveSynths(synths);
+    if (activeId === id) {
+        activeId = null;
+        document.getElementById('synthesisPanel').innerHTML = `
+            <div class="synth-empty">
+                <div class="synth-empty-glyph">?</div>
+                <h3>Select a seed</h3>
+                <p>Choose a question from the left to read its synthesis.</p>
+            </div>`;
+    }
+    renderAll();
+}
+
+// ── CLEAR ALL ─────────────────────────────────────────────────
+function clearAllSeeds() {
+    seeds = []; synths = {};
+    saveSeeds(seeds); saveSynths(synths);
+    activeId = null; activeTag = 'all';
+    document.getElementById('synthesisPanel').innerHTML = `
+        <div class="synth-empty">
+            <div class="synth-empty-glyph">?</div>
+            <h3>Plant your first question</h3>
+            <p>Use the form on the left to get started.</p>
+        </div>`;
+    renderAll();
+}
+
+// ── EXPORT / IMPORT ───────────────────────────────────────────
+function exportSeeds() {
+    const payload = { seeds, synths, exported: new Date().toISOString() };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = Object.assign(document.createElement('a'), { href: url, download: 'knowledge-garden-export.json' });
+    a.click(); URL.revokeObjectURL(url);
+}
+
+function importSeeds(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (!Array.isArray(data.seeds)) throw new Error('Invalid format');
+            const merged = [...data.seeds];
+            seeds.forEach(s => { if (!merged.find(m => m.id === s.id)) merged.push(s); });
+            seeds  = merged;
+            synths = { ...(data.synths||{}), ...synths };
+            saveSeeds(seeds); saveSynths(synths);
+            renderAll();
+            alert(`Imported ${data.seeds.length} seeds.`);
+        } catch { alert('Could not read file — make sure it is a valid Knowledge Garden export.'); }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+}
+
+// ── KEYBOARD SHORTCUT: N to open form ────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'n' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT')
+        document.getElementById('plantTrigger').click();
+});
+
+// ── INIT ──────────────────────────────────────────────────────
+renderAll();
+
+/*
+ * ═══════════════════════════════════════════════════════════════
+ * ATTACHING A SYNTHESIS TO ONE OF YOUR SEEDS
+ * ═══════════════════════════════════════════════════════════════
+ * 1. Plant a seed in the UI.
+ * 2. Export seeds (Export JSON button) — note the seed "id" field.
+ * 3. Run your question through Claude in a separate session.
+ * 4. Add the result to the exported JSON under "synths": { "SEED_ID": "text..." }
+ * 5. Import the file back — the synthesis appears immediately.
+ *
+ * LIVE GENERATION (coming later with Vercel backend):
+ *   POST /api/synthesise  { seed: string }
+ *   → { synthesis: string }
+ * Replace the synth-pending block in showSynthesis() with a
+ * fetch() to that endpoint. API key stays server-side, never
+ * exposed in the browser.
+ * ═══════════════════════════════════════════════════════════════
+ */
+</script>
+</body>
+</html>
