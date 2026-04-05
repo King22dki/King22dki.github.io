@@ -6,436 +6,626 @@
     <meta name="description" content="Daniel King's Curriculum Vitae">
     <meta name="author" content="Daniel King">
     <title>Curriculum Vitae | Daniel King</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --primary-color: #1a365d;
-            --secondary-color: #2c5282;
-            --accent-color: #3182ce;
-            --text-color: #2d3748;
-            --light-bg: #f7fafc;
-            --white: #ffffff;
-            --gray-200: #edf2f7;
-            --gray-600: #718096;
-            --transition: all 0.3s ease;
+            --ink:        #0D1B2A;
+            --ink-mid:    #1E3448;
+            --copper:     #B5651D;
+            --copper-lt:  #D4844A;
+            --copper-bg:  #FDF0E6;
+            --parchment:  #F8F4EF;
+            --paper:      #FDFAF7;
+            --paper-2:    #F2EDE6;
+            --border:     #E2D9CF;
+            --border-mid: #C8BFB3;
+            --muted:      #8A7E74;
+            --muted-lt:   #B0A499;
+            --text:       #2A1F18;
+            --text-mid:   #4A3F36;
+            --ease:       all 0.22s ease;
         }
-        
-        html { scroll-behavior: smooth; }
-        
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
         body {
-            font-family: 'Open Sans', sans-serif;
-            color: var(--text-color);
-            line-height: 1.8;
-            background-color: var(--light-bg);
+            font-family: 'Outfit', sans-serif;
+            background: var(--parchment);
+            color: var(--text);
+            line-height: 1.7;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Merriweather', serif;
-            font-weight: 700;
-            line-height: 1.3;
-            color: var(--primary-color);
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--ink);
         }
-        
+
+        a { color: var(--copper); text-decoration: none; transition: var(--ease); }
+        a:hover { color: var(--copper-lt); }
+
+        /* ── NAV ── */
         nav {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
+            background: var(--ink);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.05);
         }
-        
-        nav .container {
-            max-width: 1200px;
+
+        .nav-inner {
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 3.75rem;
         }
-        
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-            font-family: 'Merriweather', serif;
-            text-decoration: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav ul li a {
-            color: var(--white);
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: var(--transition);
+            font-size: 1.35rem;
+            color: var(--paper);
+            letter-spacing: 0.02em;
             text-decoration: none;
         }
-        
-        nav ul li a:hover {
-            background-color: var(--secondary-color);
+
+        .nav-logo span {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background: var(--copper);
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+            position: relative; top: -2px;
         }
-        
-        .cv-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--white);
-            padding: 3rem 0;
-            text-align: center;
+
+        nav ul { display: flex; list-style: none; gap: 0.2rem; }
+
+        nav ul li a {
+            display: block;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.85rem;
+            border-radius: 4px;
+            transition: var(--ease);
+            text-decoration: none;
         }
-        
-        .cv-header h1 {
-            color: var(--white);
-            font-size: 3rem;
+
+        nav ul li a:hover { color: white; background: rgba(255,255,255,0.07); }
+        nav ul li a.active { color: var(--copper-lt); background: rgba(181,101,29,0.12); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--ink);
+            padding: 4rem 0 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--copper), transparent);
+            opacity: 0.5;
+        }
+
+        .page-header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+        }
+
+        .header-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--copper-lt);
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-kicker::after {
+            content: '';
+            width: 44px; height: 1px;
+            background: var(--copper);
+            opacity: 0.45;
+        }
+
+        .page-header h1 {
+            color: var(--paper);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 300;
             margin-bottom: 0.5rem;
+            line-height: 1.15;
         }
-        
-        .cv-header p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+
+        .page-header p {
+            color: rgba(255,255,255,0.42);
+            font-size: 0.93rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
         }
-        
+
         .download-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--white);
-            color: var(--primary-color);
+            gap: 0.55rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.16);
+            color: rgba(255,255,255,0.8);
+            padding: 0.65rem 1.5rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: var(--ease);
             text-decoration: none;
-            transition: var(--transition);
         }
-        
+
         .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(181,101,29,0.18);
+            border-color: var(--copper);
+            color: var(--copper-lt);
         }
-        
-        .container {
+
+        /* ── LAYOUT ── */
+        .cv-wrap {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 3rem 2.5rem 5rem;
         }
-        
+
+        /* ── FILTER BAR ── */
         .filter-bar {
-            background-color: var(--white);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 12px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-        }
-        
-        .filter-buttons {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
-            gap: 1rem;
+            align-items: center;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
-        
+
+        .filter-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-right: 0.5rem;
+        }
+
         .filter-btn {
-            padding: 0.5rem 1rem;
-            background-color: var(--light-bg);
-            border: 2px solid var(--gray-200);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--muted);
             cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
+            transition: var(--ease);
         }
-        
-        .filter-btn:hover {
-            background-color: var(--gray-200);
-        }
-        
-        .filter-btn.active {
-            background-color: var(--accent-color);
-            color: var(--white);
-            border-color: var(--accent-color);
-        }
-        
+
+        .filter-btn:hover { border-color: var(--border-mid); color: var(--text-mid); }
+        .filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+        /* ── CV SECTIONS ── */
         .cv-section {
-            background-color: var(--white);
-            margin: 2rem 0;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2.25rem 2.5rem;
+            margin-bottom: 1.75rem;
         }
-        
-        .cv-section h2 {
-            font-size: 2rem;
+
+        .cv-section-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--ink);
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 3px solid var(--accent-color);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
-        
+
+        .cv-section-title i {
+            color: var(--copper);
+            font-size: 1.1rem;
+        }
+
+        /* ── TIMELINE ── */
         .timeline {
             position: relative;
-            padding-left: 3rem;
+            padding-left: 2.5rem;
         }
-        
-        .timeline:before {
+
+        .timeline::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--accent-color);
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--copper), var(--border));
         }
-        
+
         .timeline-item {
             position: relative;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            transition: var(--transition);
+            margin-bottom: 1.75rem;
+            padding: 1.5rem 1.75rem;
+            background: var(--parchment);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: var(--ease);
         }
-        
+
         .timeline-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateX(6px);
+            box-shadow: 0 4px 18px rgba(181,101,29,0.08);
+            border-color: var(--border-mid);
         }
-        
-        .timeline-item:before {
+
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: -3.5rem;
+            left: -2.85rem;
             top: 1.5rem;
-            width: 15px;
-            height: 15px;
+            width: 12px; height: 12px;
             border-radius: 50%;
-            background: var(--accent-color);
-            border: 3px solid var(--white);
-            box-shadow: 0 0 0 3px var(--accent-color);
+            background: var(--copper);
+            border: 2px solid var(--paper);
+            box-shadow: 0 0 0 2px var(--copper);
         }
-        
+
         .timeline-date {
-            color: var(--accent-color);
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            color: var(--copper);
+            margin-bottom: 0.4rem;
         }
-        
+
         .timeline-title {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.2rem;
         }
-        
-        .timeline-subtitle {
-            color: var(--gray-600);
+
+        .timeline-org {
+            font-size: 0.83rem;
+            color: var(--muted);
             font-style: italic;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.85rem;
         }
-        
-        .timeline-content {
-            margin-top: 1rem;
-        }
-        
+
         .timeline-content ul {
-            padding-left: 1.5rem;
+            padding-left: 1.25rem;
         }
-        
+
         .timeline-content li {
-            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            margin-bottom: 0.4rem;
+            line-height: 1.65;
         }
-        
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            margin-bottom: 0.4rem;
+            line-height: 1.65;
+        }
+
+        /* ── SKILL GRID ── */
         .skill-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+            gap: 0.85rem;
+            margin-top: 1.25rem;
         }
-        
+
         .skill-card {
-            padding: 1rem;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid var(--accent-color);
+            background: var(--parchment);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--copper);
+            border-radius: 6px;
+            padding: 0.9rem 1rem;
+            transition: var(--ease);
         }
-        
+
+        .skill-card:hover {
+            background: var(--copper-bg);
+            border-color: var(--border-mid);
+            border-left-color: var(--copper);
+        }
+
         .skill-card h4 {
-            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.2rem;
+        }
+
+        .skill-card p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 0.03em;
+        }
+
+        .skill-card-icon {
+            font-size: 1.75rem;
+            color: var(--copper);
             margin-bottom: 0.5rem;
+            display: block;
         }
-        
-        .expandable {
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
+
+        /* ── EXPANDABLE PROJECTS ── */
+        .expandable { margin-bottom: 0.75rem; }
+
         .expandable-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            margin-bottom: 1rem;
+            padding: 1.1rem 1.25rem;
+            background: var(--parchment);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--ease);
         }
-        
+
         .expandable-header:hover {
-            background-color: var(--gray-200);
+            background: var(--copper-bg);
+            border-color: var(--border-mid);
         }
-        
+
+        .expandable-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin: 0;
+        }
+
+        .expandable-header p {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin: 0.2rem 0 0;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.03em;
+        }
+
+        .expandable-header i {
+            color: var(--copper);
+            font-size: 0.9rem;
+            transition: var(--ease);
+            flex-shrink: 0;
+        }
+
         .expandable-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
+            background: var(--paper-2);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 0 1.25rem;
         }
-        
-        .expandable-content.expanded {
-            max-height: 1000px;
+
+        .expandable-content.expanded { max-height: 600px; padding: 1.25rem; }
+
+        .expandable-content ul { padding-left: 1.25rem; }
+        .expandable-content li { font-size: 0.88rem; color: var(--text-mid); margin-bottom: 0.4rem; line-height: 1.65; }
+
+        /* ── SUMMARY TEXT ── */
+        .summary-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text);
         }
-        
+
+        .summary-text a { color: var(--copper); font-weight: 400; }
+
+        /* ── SECTION SUBHEADING ── */
+        .sub-heading {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--copper);
+            margin: 2rem 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sub-heading::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── FOOTER ── */
         footer {
-            background-color: var(--primary-color);
-            color: var(--white);
+            background: var(--ink);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.28);
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
         }
-        
-        @media (max-width: 768px) {
-            .cv-header h1 { font-size: 2.2rem; }
-            nav .container { flex-direction: column; gap: 1rem; }
-            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
-            .timeline { padding-left: 2rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 960px) {
+            .nav-inner { padding: 0.7rem 1.25rem; height: auto; flex-wrap: wrap; gap: 0.5rem; }
+            nav ul li a { font-size: 0.72rem; padding: 0.38rem 0.6rem; }
+            .cv-wrap { padding: 2rem 1.25rem 4rem; }
+            .page-header-inner { padding: 0 1.25rem; }
+            .skill-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 560px) {
             .skill-grid { grid-template-columns: 1fr; }
+            .cv-section { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
+
     <nav>
-        <div class="container">
-            <a href="index.html" class="logo">Daniel King</a>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Daniel King<span></span></a>
             <ul>
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="blog-archive.html">Blog</a></li>
+                <li><a href="knowledge-garden.html">Ideas</a></li>
+                <li><a href="cv.html" class="active">CV</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="cv-header">
-        <div class="container">
+    <div class="page-header">
+        <div class="page-header-inner">
+            <p class="header-kicker"><i class="fas fa-file-alt"></i> Curriculum Vitae</p>
             <h1>Daniel King Igwe</h1>
-            <p>Engineering Lecturer | Autodidact | Research Scientist</p>
-            <a href="Resume.pdf" download="Daniel_King_CV.pdf" type="application/pdf" class="download-btn">
-                <i class="fas fa-download"></i>
-                Download PDF
+            <p>Engineering Lecturer &nbsp;·&nbsp; Autodidact &nbsp;·&nbsp; Research Scientist</p>
+            <a href="Resume.pdf" download="Daniel_King_CV.pdf" class="download-btn">
+                <i class="fas fa-download"></i> Download PDF
             </a>
         </div>
     </div>
 
-    <div class="container">
+    <div class="cv-wrap">
+
+        <!-- Filter bar -->
         <div class="filter-bar">
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterSkills('all')">All Skills</button>
-                <button class="filter-btn" onclick="filterSkills('technical')">Technical</button>
-                <button class="filter-btn" onclick="filterSkills('soft')">Soft Skills</button>
-                <button class="filter-btn" onclick="filterSkills('programming')">Programming</button>
-            </div>
+            <span class="filter-label">Filter skills</span>
+            <button class="filter-btn active" onclick="filterSkills('all', this)">All</button>
+            <button class="filter-btn" onclick="filterSkills('technical', this)">Technical</button>
+            <button class="filter-btn" onclick="filterSkills('soft', this)">Soft skills</button>
+            <button class="filter-btn" onclick="filterSkills('programming', this)">Programming</button>
         </div>
 
+        <!-- Summary -->
         <div class="cv-section">
-            <h2><i class="fas fa-user"></i> Professional Summary</h2>
-            <p>
-                Highly skilled and adaptable autodidact with a background in chemical engineering and lecturing. Co-founder of <a href="https://queryous.ai/" target="_blank" style="color: var(--accent-color); font-weight: 600;">Queryous</a>, a startup dedicated to democratizing generative AI, enabling small companies, educational institutions, and individuals to harness AI for enhanced learning processes. Passionate about bridging theoretical mathematics, AI research, and practical engineering applications.
-            </p>
+            <h2 class="cv-section-title"><i class="fas fa-user"></i> Professional Summary</h2>
+            <p class="summary-text">Highly skilled and adaptable autodidact with a background in chemical engineering and lecturing. Co-founder of <a href="https://queryous.ai/" target="_blank" rel="noopener noreferrer">Queryous</a>, a startup dedicated to democratising generative AI, enabling small companies, educational institutions, and individuals to harness AI for enhanced learning processes. Passionate about bridging theoretical mathematics, AI research, and practical engineering applications.</p>
         </div>
 
+        <!-- Experience -->
         <div class="cv-section">
-            <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            <h2 class="cv-section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
             <div class="timeline">
+
                 <div class="timeline-item">
-                    <div class="timeline-date">August 2024 - Present</div>
+                    <div class="timeline-date">August 2024 – Present</div>
                     <div class="timeline-title">Engineering Lecturer</div>
-                    <div class="timeline-subtitle">London South Bank Technical College, London, UK</div>
-                    <div class="timeline-content">
-                        <ul>
-                            <li>Teaching modules across Mathematics, Engineering and Scientific Investigation</li>
-                            <li>Contributing to digital learning team on technology integration strategies</li>
-                            <li>Key modules: Introduction to Scientific Investigation, Data Analysis, Engineering Mathematics (Linear Algebra, Calculus, Statistics), Engineering Project</li>
-                        </ul>
-                    </div>
+                    <div class="timeline-org">London South Bank Technical College, London, UK</div>
+                    <div class="timeline-content"><ul>
+                        <li>Teaching modules across Mathematics, Engineering and Scientific Investigation</li>
+                        <li>Contributing to digital learning team on technology integration strategies</li>
+                        <li>Key modules: Scientific Investigation, Data Analysis, Engineering Mathematics (Linear Algebra, Calculus, Statistics), Engineering Project</li>
+                    </ul></div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">March 2024 - Present</div>
+                    <div class="timeline-date">March 2024 – Present</div>
                     <div class="timeline-title">Research Scientist</div>
-                    <div class="timeline-subtitle">Queryous, London, UK</div>
-                    <div class="timeline-content">
-                        <ul>
-                            <li>Technical Lead overseeing design of investigations and hypothesis generation</li>
-                            <li>Conducting data analysis using Python to evaluate LLM performance</li>
-                            <li>Researching Generative AI technologies in educational settings</li>
-                            <li>Testing Large Language Models using prompt engineering techniques</li>
-                        </ul>
-                    </div>
+                    <div class="timeline-org">Queryous, London, UK</div>
+                    <div class="timeline-content"><ul>
+                        <li>Technical Lead overseeing design of investigations and hypothesis generation</li>
+                        <li>Conducting data analysis using Python to evaluate LLM performance</li>
+                        <li>Researching Generative AI technologies in educational settings</li>
+                        <li>Testing Large Language Models using prompt engineering techniques</li>
+                    </ul></div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">December 2023 - August 2024</div>
-                    <div class="timeline-title">Chemistry & Physics Technician / Engineering Mathematics Lecturer</div>
-                    <div class="timeline-subtitle">London South Bank Technical College, London, UK</div>
-                    <div class="timeline-content">
-                        <ul>
-                            <li>Organised practical sessions in physics and chemistry</li>
-                            <li>Managed hazardous chemicals safely and developed new procedures using mathematical approaches</li>
-                            <li>Operated FTIR spectroscopy, digital oscilloscopes, and photon counters</li>
-                        </ul>
-                    </div>
+                    <div class="timeline-date">December 2023 – August 2024</div>
+                    <div class="timeline-title">Chemistry &amp; Physics Technician / Engineering Mathematics Lecturer</div>
+                    <div class="timeline-org">London South Bank Technical College, London, UK</div>
+                    <div class="timeline-content"><ul>
+                        <li>Organised practical sessions in physics and chemistry</li>
+                        <li>Managed hazardous chemicals safely and developed new procedures using mathematical approaches</li>
+                        <li>Operated FTIR spectroscopy, digital oscilloscopes, and photon counters</li>
+                    </ul></div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">September 2021 - July 2023</div>
+                    <div class="timeline-date">September 2021 – July 2023</div>
                     <div class="timeline-title">Graduate Teaching Assistant</div>
-                    <div class="timeline-subtitle">The Heathland School, London, UK</div>
-                    <div class="timeline-content">
-                        <ul>
-                            <li>Improved academic performance of students in maths, science, and computer science</li>
-                            <li>Utilized ChatGPT to create multilingual worksheets, enhancing accessibility</li>
-                            <li>Provided tailored tutoring and support for struggling students</li>
-                        </ul>
-                    </div>
+                    <div class="timeline-org">The Heathland School, London, UK</div>
+                    <div class="timeline-content"><ul>
+                        <li>Improved academic performance of students in maths, science, and computer science</li>
+                        <li>Utilised ChatGPT to create multilingual worksheets, enhancing accessibility</li>
+                        <li>Provided tailored tutoring and support for struggling students</li>
+                    </ul></div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">July 2019 - December 2019</div>
+                    <div class="timeline-date">July 2019 – December 2019</div>
                     <div class="timeline-title">Graduate Research Assistant</div>
-                    <div class="timeline-subtitle">London South Bank University, London, UK</div>
-                    <div class="timeline-content">
-                        <ul>
-                            <li>Conducted air pollution dispersion modelling using Star CCM+</li>
-                            <li>Predicted complex air flows around high-rise buildings in London</li>
-                            <li>Investigated deep learning integration with Computational Fluid Dynamics for adaptive meshing</li>
-                        </ul>
-                    </div>
+                    <div class="timeline-org">London South Bank University, London, UK</div>
+                    <div class="timeline-content"><ul>
+                        <li>Conducted air pollution dispersion modelling using Star CCM+</li>
+                        <li>Predicted complex air flows around high-rise buildings in London</li>
+                        <li>Investigated deep learning integration with CFD for adaptive meshing</li>
+                    </ul></div>
                 </div>
+
             </div>
         </div>
 
+        <!-- Education -->
         <div class="cv-section">
-            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <h2 class="cv-section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
             <div class="timeline">
+
                 <div class="timeline-item">
-                    <div class="timeline-date">September 2019 - September 2020</div>
+                    <div class="timeline-date">September 2019 – September 2020</div>
                     <div class="timeline-title">MSc Advanced Chemical Engineering</div>
-                    <div class="timeline-subtitle">Imperial College London, London, UK</div>
+                    <div class="timeline-org">Imperial College London, London, UK</div>
                     <div class="timeline-content">
                         <p><strong>Thesis:</strong> Development of Group Contribution Models for Furanic Compounds</p>
                         <p><strong>Key Modules:</strong> Fluid Mechanics, Dynamic Behaviour of Process Systems, Molecular Modelling of Fluids, Advanced Process Systems, Membrane Science</p>
@@ -443,198 +633,144 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">September 2016 - June 2019</div>
-                    <div class="timeline-title">BEng (Hons) Chemical and Process Engineering (First Class)</div>
-                    <div class="timeline-subtitle">London South Bank University, London, UK</div>
+                    <div class="timeline-date">September 2016 – June 2019</div>
+                    <div class="timeline-title">BEng (Hons) Chemical and Process Engineering — First Class</div>
+                    <div class="timeline-org">London South Bank University, London, UK</div>
                     <div class="timeline-content">
                         <p><strong>Key Modules:</strong> Engineering Mathematics and Modelling, Thermodynamics, Chemical Engineering Processes, Advanced Fluids and Control, Clean Technology</p>
                     </div>
                 </div>
+
             </div>
         </div>
 
+        <!-- Skills -->
         <div class="cv-section" id="skillsSection">
-            <h2><i class="fas fa-tools"></i> Skills & Competencies</h2>
-            
-            <h3 style="margin-top: 2rem;">Technical Skills</h3>
+            <h2 class="cv-section-title"><i class="fas fa-tools"></i> Skills &amp; Competencies</h2>
+
+            <p class="sub-heading">Technical skills</p>
             <div class="skill-grid">
-                <div class="skill-card" data-category="programming technical">
-                    <h4>Python</h4>
-                    <p>Advanced proficiency</p>
-                </div>
-                <div class="skill-card" data-category="programming technical">
-                    <h4>R</h4>
-                    <p>Statistical computing</p>
-                </div>
-                <div class="skill-card" data-category="programming technical">
-                    <h4>JavaScript</h4>
-                    <p>Web development</p>
-                </div>
-                <div class="skill-card" data-category="programming technical">
-                    <h4>HTML & CSS</h4>
-                    <p>Front-end design</p>
-                </div>
-                <div class="skill-card" data-category="technical">
-                    <h4>Machine Learning</h4>
-                    <p>Scikit-learn, PyTorch</p>
-                </div>
-                <div class="skill-card" data-category="technical">
-                    <h4>Deep Learning</h4>
-                    <p>Neural Networks, CNNs, RNNs</p>
-                </div>
-                <div class="skill-card" data-category="technical">
-                    <h4>Data Visualization</h4>
-                    <p>Matplotlib, Seaborn, Plotly</p>
-                </div>
-                <div class="skill-card" data-category="technical">
-                    <h4>Statistical Analysis</h4>
-                    <p>Hypothesis testing, regression</p>
-                </div>
-                <div class="skill-card" data-category="technical">
-                    <h4>MS Office</h4>
-                    <p>Advanced Excel, PowerPoint</p>
-                </div>
-                <div class="skill-card" data-category="technical">
-                    <h4>Version Control</h4>
-                    <p>Git & GitHub</p>
-                </div>
+                <div class="skill-card" data-category="programming technical"><h4>Python</h4><p>Advanced proficiency</p></div>
+                <div class="skill-card" data-category="programming technical"><h4>R</h4><p>Statistical computing</p></div>
+                <div class="skill-card" data-category="programming technical"><h4>JavaScript</h4><p>Web development</p></div>
+                <div class="skill-card" data-category="programming technical"><h4>HTML &amp; CSS</h4><p>Front-end design</p></div>
+                <div class="skill-card" data-category="technical"><h4>Machine Learning</h4><p>Scikit-learn, PyTorch</p></div>
+                <div class="skill-card" data-category="technical"><h4>Deep Learning</h4><p>Neural Networks, CNNs, RNNs</p></div>
+                <div class="skill-card" data-category="technical"><h4>Data Visualisation</h4><p>Matplotlib, Seaborn, Plotly</p></div>
+                <div class="skill-card" data-category="technical"><h4>Statistical Analysis</h4><p>Hypothesis testing, regression</p></div>
+                <div class="skill-card" data-category="technical"><h4>MS Office</h4><p>Advanced Excel, PowerPoint</p></div>
+                <div class="skill-card" data-category="technical"><h4>Version Control</h4><p>Git &amp; GitHub</p></div>
             </div>
 
-            <h3 style="margin-top: 2rem;">Soft Skills</h3>
+            <p class="sub-heading">Soft skills</p>
             <div class="skill-grid">
-                <div class="skill-card" data-category="soft">
-                    <h4>Problem-Solving</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Critical Thinking</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Communication</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Active Listening</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Teamwork</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Adaptability</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Creativity</h4>
-                </div>
-                <div class="skill-card" data-category="soft">
-                    <h4>Ethical Awareness</h4>
-                </div>
+                <div class="skill-card" data-category="soft"><h4>Problem-Solving</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Critical Thinking</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Communication</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Active Listening</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Teamwork</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Adaptability</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Creativity</h4></div>
+                <div class="skill-card" data-category="soft"><h4>Ethical Awareness</h4></div>
             </div>
         </div>
 
+        <!-- Projects -->
         <div class="cv-section">
-            <h2><i class="fas fa-project-diagram"></i> Key Projects</h2>
-            
+            <h2 class="cv-section-title"><i class="fas fa-project-diagram"></i> Key Projects</h2>
+
             <div class="expandable">
                 <div class="expandable-header" onclick="toggleExpand(this)">
                     <div>
-                        <h3 style="margin: 0;">MSc Thesis: Group Contribution Models for Furanic Compounds</h3>
-                        <p style="color: var(--gray-600); margin: 0;">Imperial College London | 2020</p>
+                        <h3>MSc Thesis: Group Contribution Models for Furanic Compounds</h3>
+                        <p>Imperial College London &nbsp;·&nbsp; 2020</p>
                     </div>
                     <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="expandable-content">
-                    <ul>
-                        <li>Developed models using Statistical Associating Fluid Theory (SAFT) Equation of State</li>
-                        <li>Project received £3.5 million in funding</li>
-                        <li>Utilized Python libraries: Matplotlib, Pandas, scikit-learn, NumPy for fluid phase equilibria</li>
-                        <li>Modified and utilized existing database by converting CSV to XML and JSON formats</li>
-                    </ul>
-                </div>
+                <div class="expandable-content"><ul>
+                    <li>Developed models using Statistical Associating Fluid Theory (SAFT) Equation of State</li>
+                    <li>Project received £3.5 million in funding</li>
+                    <li>Utilised Python libraries: Matplotlib, Pandas, scikit-learn, NumPy for fluid phase equilibria</li>
+                    <li>Modified and utilised existing database by converting CSV to XML and JSON formats</li>
+                </ul></div>
             </div>
 
             <div class="expandable">
                 <div class="expandable-header" onclick="toggleExpand(this)">
                     <div>
-                        <h3 style="margin: 0;">Text Classification Using Perceptron and Logistic Regression</h3>
-                        <p style="color: var(--gray-600); margin: 0;">Self-Taught Project</p>
+                        <h3>Text Classification Using Perceptron and Logistic Regression</h3>
+                        <p>Self-Taught Project</p>
                     </div>
                     <i class="fas fa-chevron-down"></i>
                 </div>
-                <div class="expandable-content">
-                    <ul>
-                        <li>Developed and implemented classification models from scratch</li>
-                        <li>Performed feature extraction using bag-of-words</li>
-                        <li>Visualized and analyzed results comparing algorithm effectiveness</li>
-                        <li>Used NumPy, Pandas, Scikit-learn, Matplotlib, and Seaborn</li>
-                    </ul>
-                </div>
+                <div class="expandable-content"><ul>
+                    <li>Developed and implemented classification models from scratch</li>
+                    <li>Performed feature extraction using bag-of-words</li>
+                    <li>Visualised and analysed results comparing algorithm effectiveness</li>
+                    <li>Used NumPy, Pandas, Scikit-learn, Matplotlib, and Seaborn</li>
+                </ul></div>
             </div>
         </div>
 
+        <!-- Interests -->
         <div class="cv-section">
-            <h2><i class="fas fa-heart"></i> Interests & Activities</h2>
+            <h2 class="cv-section-title"><i class="fas fa-heart"></i> Interests &amp; Activities</h2>
             <div class="skill-grid">
                 <div class="skill-card">
-                    <i class="fas fa-mountain" style="font-size: 2rem; color: var(--accent-color);"></i>
+                    <i class="fas fa-mountain skill-card-icon"></i>
                     <h4>Bouldering</h4>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-book" style="font-size: 2rem; color: var(--accent-color);"></i>
-                    <h4>Reading & Writing</h4>
+                    <i class="fas fa-book skill-card-icon"></i>
+                    <h4>Reading &amp; Writing</h4>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-users" style="font-size: 2rem; color: var(--accent-color);"></i>
+                    <i class="fas fa-users skill-card-icon"></i>
                     <h4>Attending Seminars</h4>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-dumbbell" style="font-size: 2rem; color: var(--accent-color);"></i>
+                    <i class="fas fa-dumbbell skill-card-icon"></i>
                     <h4>Brazilian Jiu Jitsu</h4>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-calculator" style="font-size: 2rem; color: var(--accent-color);"></i>
+                    <i class="fas fa-calculator skill-card-icon"></i>
                     <h4>Mathematics</h4>
                 </div>
                 <div class="skill-card">
-                    <i class="fas fa-code" style="font-size: 2rem; color: var(--accent-color);"></i>
+                    <i class="fas fa-code skill-card-icon"></i>
                     <h4>Programming</h4>
                 </div>
             </div>
         </div>
-    </div>
+
+    </div><!-- /cv-wrap -->
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Daniel King. All rights reserved.</p>
-        </div>
+        <p>&copy; 2026 Daniel King &nbsp;·&nbsp; All rights reserved</p>
     </footer>
 
     <script>
         function toggleExpand(header) {
             const content = header.nextElementSibling;
             const icon = header.querySelector('i');
-            
             content.classList.toggle('expanded');
             icon.classList.toggle('fa-chevron-down');
             icon.classList.toggle('fa-chevron-up');
         }
 
-        function filterSkills(category) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            const skills = document.querySelectorAll('.skill-card');
-            
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            skills.forEach(skill => {
+        function filterSkills(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.skill-card').forEach(card => {
                 if (category === 'all') {
-                    skill.style.display = 'block';
+                    card.style.display = 'block';
                 } else {
-                    if (skill.dataset.category && skill.dataset.category.includes(category)) {
-                        skill.style.display = 'block';
-                    } else {
-                        skill.style.display = 'none';
-                    }
+                    card.style.display = (card.dataset.category && card.dataset.category.includes(category))
+                        ? 'block' : 'none';
                 }
             });
         }
     </script>
+
 </body>
 </html>
