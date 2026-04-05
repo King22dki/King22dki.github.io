@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daniel King - Engineering Lecturer, Autodidact, and AI Research Enthusiast">
+    <meta name="author" content="Daniel King">
+    <title>Daniel King | Engineering Lecturer & AI Researcher</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── TOKENS ── */
+        :root {
+            --ink:        #0D1B2A;
+            --ink-mid:    #1E3448;
+            --copper:     #B5651D;
+            --copper-lt:  #D4844A;
+            --copper-bg:  #FDF0E6;
+            --parchment:  #F8F4EF;
+            --paper:      #FDFAF7;
+            --paper-2:    #F2EDE6;
+            --border:     #E2D9CF;
+            --border-mid: #C8BFB3;
+            --muted:      #8A7E74;
+            --muted-lt:   #B0A499;
+            --text:       #2A1F18;
+            --text-mid:   #4A3F36;
+            --ease:       all 0.22s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--parchment);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        a { color: var(--copper); text-decoration: none; transition: var(--ease); }
+        a:hover { color: var(--copper-lt); }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--ink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 3.75rem;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: var(--paper);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background: var(--copper);
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+            position: relative; top: -2px;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 0.2rem; }
+
+        nav ul li a {
+            display: block;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.85rem;
+            border-radius: 4px;
+            transition: var(--ease);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover { color: white; background: rgba(255,255,255,0.07); }
+        nav ul li a.active { color: var(--copper-lt); background: rgba(181,101,29,0.12); }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--ink);
+            padding: 5.5rem 0 4.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Grain overlay */
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* Subtle copper line at top */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--copper), transparent);
+            opacity: 0.5;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+        }
+
+        .hero-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--copper-lt);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.1s forwards;
+        }
+
+        .hero-kicker::before,
+        .hero-kicker::after {
+            content: '';
+            width: 40px; height: 1px;
+            background: var(--copper);
+            opacity: 0.4;
+        }
+
+        .hero h1 {
+            color: var(--paper);
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.25s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.45);
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.4s forwards;
+        }
+
+        .banner-wrap {
+            max-width: 520px;
+            margin: 0 auto 2.75rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.55s forwards;
+        }
+
+        .banner-wrap img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            transition: var(--ease);
+        }
+
+        .banner-wrap img:hover { transform: translateY(-4px); box-shadow: 0 28px 70px rgba(0,0,0,0.5); }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.7s forwards;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.75);
+            padding: 0.6rem 1.35rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: var(--ease);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: rgba(181,101,29,0.18);
+            border-color: var(--copper);
+            color: var(--copper-lt);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── SHARED SECTION STYLES ── */
+        section { padding: 5rem 0; }
+
+        .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+        }
+
+        .section-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--copper);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-kicker::after {
+            content: '';
+            width: 36px; height: 1px;
+            background: var(--copper);
+            opacity: 0.45;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            line-height: 1.15;
+        }
+
+        .section-title em { font-style: italic; color: var(--copper); }
+
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 520px;
+            line-height: 1.75;
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+
+        /* alternating section backgrounds */
+        .bg-paper  { background: var(--paper); }
+        .bg-parch  { background: var(--parchment); }
+
+        /* ── ABOUT ── */
+        #about { background: var(--paper); }
+
+        .about-card {
+            background: var(--parchment);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--copper);
+            border-radius: 8px;
+            padding: 2.5rem 3rem;
+            max-width: 860px;
+            transition: var(--ease);
+        }
+
+        .about-card:hover {
+            box-shadow: 0 8px 32px rgba(181,101,29,0.08);
+        }
+
+        .about-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.12rem;
+            line-height: 1.9;
+            color: var(--text);
+            margin-bottom: 1.4rem;
+        }
+
+        .about-card p:last-child { margin-bottom: 0; }
+
+        .about-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--copper);
+            margin-top: 1.5rem;
+            transition: var(--ease);
+        }
+
+        .about-link:hover { gap: 0.6rem; color: var(--copper-lt); }
+
+        /* ── PROJECTS ── */
+        #projects { background: var(--parchment); }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--copper);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--ease);
+        }
+
+        .project-card:hover {
+            box-shadow: 0 8px 28px rgba(181,101,29,0.1);
+            transform: translateY(-4px);
+        }
+
+        .project-card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.85rem;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+        .proj-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.38rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.67rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--copper);
+            border: 1.5px solid rgba(181,101,29,0.3);
+            padding: 0.32rem 0.75rem;
+            border-radius: 4px;
+            transition: var(--ease);
+            text-decoration: none;
+        }
+
+        .proj-link:hover {
+            background: var(--copper-bg);
+            border-color: var(--copper);
+            color: var(--copper);
+        }
+
+        /* ── KNOWLEDGE GARDEN TEASER ── */
+        #garden { background: var(--paper); }
+
+        .garden-teaser {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(13,27,42,0.12);
+            max-width: 1000px;
+        }
+
+        .garden-left {
+            background: var(--ink);
+            padding: 3.5rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .garden-left::before {
+            content: '"';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14rem;
+            color: rgba(255,255,255,0.03);
+            position: absolute;
+            top: -3rem; left: 0.5rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .garden-left .section-kicker { margin-bottom: 1.25rem; }
+
+        .garden-left h3 {
+            color: var(--paper);
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .garden-left h3 em { font-style: italic; color: var(--copper-lt); }
+
+        .garden-left p {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 360px;
+        }
+
+        .garden-right {
+            background: var(--copper-bg);
+            padding: 3.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .garden-right p {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+
+        .garden-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .garden-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.06em;
+            color: var(--text-mid);
+        }
+
+        .garden-pill i {
+            color: var(--copper);
+            font-size: 0.65rem;
+            width: 14px;
+        }
+
+        .garden-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--ink);
+            color: var(--paper);
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: var(--ease);
+            text-decoration: none;
+            align-self: flex-start;
+        }
+
+        .garden-cta:hover { background: var(--ink-mid); color: var(--paper); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,27,42,0.25); }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: var(--ink);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--copper), transparent);
+            opacity: 0.5;
+        }
+
+        #contact .section-kicker { justify-content: center; }
+        #contact .section-kicker::after { display: none; }
+
+        #contact .section-title { color: var(--paper); }
+
+        .contact-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.45);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .email-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--paper);
+            color: var(--ink);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--ease);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+            text-decoration: none;
+        }
+
+        .email-btn:hover { background: var(--copper-bg); color: var(--ink); transform: translateY(-3px); box-shadow: 0 8px 35px rgba(0,0,0,0.35); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.28);
+            text-align: center;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── SCROLL ANIMATE ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 960px) {
+            .nav-inner { padding: 0.7rem 1.25rem; height: auto; flex-wrap: wrap; gap: 0.5rem; }
+            nav ul li a { font-size: 0.72rem; padding: 0.38rem 0.6rem; }
+            .hero { padding: 4rem 0 3.5rem; }
+            .hero-inner { padding: 0 1.25rem; }
+            .section-inner { padding: 0 1.5rem; }
+            .garden-teaser { grid-template-columns: 1fr; }
+            .about-card { padding: 2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            section { padding: 4rem 0; }
+        }
+
+        @media (max-width: 600px) {
+            .social-row { flex-direction: column; align-items: center; gap: 0.75rem; }
+            .garden-left, .garden-right { padding: 2.25rem 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">Daniel King<span></span></a>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="investment-calculator.html">Calculator</a></li>
+                <li><a href="knowledge-garden.html">Ideas</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section id="home" class="hero">
+        <div class="hero-inner">
+            <p class="hero-kicker">Engineering Lecturer &nbsp;·&nbsp; Autodidact &nbsp;·&nbsp; AI Researcher</p>
+            <h1>Daniel King</h1>
+            <p class="hero-subtitle">London &nbsp;·&nbsp; Chemical Engineering &nbsp;·&nbsp; Probability Theory &nbsp;·&nbsp; Machine Learning</p>
+            <div class="banner-wrap">
+                <img src="Queryous2.GIF" alt="Queryous banner">
+            </div>
+            <div class="social-row">
+                <a href="https://www.linkedin.com/in/daniel-king-igwe/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://x.com/king22dki" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-x-twitter"></i> Twitter / X
+                </a>
+                <a href="https://github.com/King22dki" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section id="about" class="bg-paper">
+        <div class="section-inner">
+            <p class="section-kicker reveal"><i class="fas fa-user"></i> About</p>
+            <h2 class="section-title reveal">Who I am</h2>
+            <div class="about-card reveal">
+                <p>Hi, I'm Daniel King — an autodidact with a background in Chemical Engineering. By day I work as an engineering lecturer; in my free time I explore mathematics, neuroscience, physics, and philosophy. My work in probability theory focuses on higher-dimensional spaces and their implications for understanding artificial intelligence.</p>
+                <p>I co-founded <a href="https://queryous.ai/" target="_blank" rel="noopener noreferrer">Queryous</a> — a startup democratising generative AI for educational institutions. This website is where I share my projects, working ideas, and ongoing thinking.</p>
+                <a href="about-extended.html" class="about-link">
+                    Read the full about page <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects" class="bg-parch">
+        <div class="section-inner">
+            <p class="section-kicker reveal"><i class="fas fa-code"></i> Projects</p>
+            <h2 class="section-title reveal">Selected work</h2>
+            <p class="section-desc reveal">Repositories and tools built at the intersection of mathematics, AI, and engineering.</p>
+            <div class="projects-grid">
+
+                <div class="project-card reveal">
+                    <h3>Natural Language Processing Journey</h3>
+                    <p>A documented exploration of NLP concepts — from tokenization and word embeddings through to transformer architectures. Implemented from fundamentals, with emphasis on understanding over abstraction.</p>
+                    <div class="project-links">
+                        <a href="project-nlp.html" class="proj-link"><i class="fas fa-info-circle"></i> Details</a>
+                        <a href="https://github.com/King22dki/natural-language-processing-Journey" target="_blank" rel="noopener noreferrer" class="proj-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <h3>Maths Codes</h3>
+                    <p>A curated collection of mathematical algorithms: numerical methods, linear algebra, differential equations, optimisation, and Monte Carlo techniques. Each implementation is accompanied by the underlying theory.</p>
+                    <div class="project-links">
+                        <a href="project-maths.html" class="proj-link"><i class="fas fa-info-circle"></i> Details</a>
+                        <a href="https://github.com/King22dki/Maths_Codes" target="_blank" rel="noopener noreferrer" class="proj-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <h3>Investment Portfolio Calculator</h3>
+                    <p>An interactive tool projecting future portfolio value across stocks, bonds, real estate, crypto, and savings. Features compound interest modelling, inflation adjustment, capital gains tax, and year-by-year charts.</p>
+                    <div class="project-links">
+                        <a href="investment-calculator.html" class="proj-link"><i class="fas fa-calculator"></i> Open tool</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── KNOWLEDGE GARDEN ── -->
+    <section id="garden" class="bg-paper">
+        <div class="section-inner">
+            <p class="section-kicker reveal"><i class="fas fa-seedling"></i> Ideas</p>
+            <h2 class="section-title reveal">Knowledge Garden</h2>
+            <p class="section-desc reveal">A living space for working thinking — not finished essays.</p>
+            <div class="garden-teaser reveal">
+                <div class="garden-left">
+                    <p class="section-kicker"><i class="fas fa-seedling"></i> Beta &nbsp;·&nbsp; Live generation coming</p>
+                    <h3>Questions worth<br><em>sitting with</em></h3>
+                    <p>Genuine fragments — things I've been turning over while reading, teaching, or training — expanded through AI synthesis and reviewed before they appear here.</p>
+                </div>
+                <div class="garden-right">
+                    <p>Rather than a traditional blog, I maintain a space where I plant real questions and let AI help me think through them. It's a more honest format: process over product, questions over conclusions.</p>
+                    <div class="garden-pills">
+                        <div class="garden-pill"><i class="fas fa-lock"></i> Seeds stored privately in your browser</div>
+                        <div class="garden-pill"><i class="fas fa-robot"></i> AI synthesis reviewed by me before publishing</div>
+                        <div class="garden-pill"><i class="fas fa-sync-alt"></i> Updated continuously as I think</div>
+                        <div class="garden-pill"><i class="fas fa-download"></i> Export / import your own seeds as JSON</div>
+                    </div>
+                    <a href="knowledge-garden.html" class="garden-cta">
+                        <i class="fas fa-seedling"></i> Visit the Knowledge Garden <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact">
+        <div class="section-inner">
+            <p class="section-kicker" style="justify-content:center;"><i class="fas fa-envelope"></i> Contact</p>
+            <h2 class="section-title" style="color:var(--paper); margin-bottom:1rem;">Get in touch</h2>
+            <p class="contact-desc">I'm always open to conversations with researchers, educators, and curious minds — whether about collaboration, ideas, or anything in the intersection of maths, AI, and engineering.</p>
+            <a href="mailto:danielkingigwe@gmail.com" class="email-btn">
+                <i class="fas fa-envelope"></i> danielkingigwe@gmail.com
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Daniel King &nbsp;·&nbsp; All rights reserved</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
