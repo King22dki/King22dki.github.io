@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Investment Portfolio Calculator - Daniel King">
+    <meta name="author" content="Daniel King">
+    <title>Investment Calculator | Daniel King</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink:        #0D1B2A;
+            --ink-mid:    #1E3448;
+            --copper:     #B5651D;
+            --copper-lt:  #D4844A;
+            --copper-bg:  #FDF0E6;
+            --parchment:  #F8F4EF;
+            --paper:      #FDFAF7;
+            --paper-2:    #F2EDE6;
+            --border:     #E2D9CF;
+            --border-mid: #C8BFB3;
+            --muted:      #8A7E74;
+            --muted-lt:   #B0A499;
+            --text:       #2A1F18;
+            --text-mid:   #4A3F36;
+            --ease:       all 0.22s ease;
+
+            /* asset colours — refined to fit palette */
+            --stocks:     #2D6A9F;
+            --bonds:      #4A7C59;
+            --realestate: #B5651D;
+            --crypto:     #6B4FA0;
+            --savings:    #7A4F3A;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--parchment);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        a { color: var(--copper); text-decoration: none; transition: var(--ease); }
+        a:hover { color: var(--copper-lt); }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--ink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 3.75rem;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: var(--paper);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background: var(--copper);
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+            position: relative; top: -2px;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 0.2rem; }
+
+        nav ul li a {
+            display: block;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.85rem;
+            border-radius: 4px;
+            transition: var(--ease);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover { color: white; background: rgba(255,255,255,0.07); }
+        nav ul li a.active { color: var(--copper-lt); background: rgba(181,101,29,0.12); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--ink);
+            padding: 4rem 0 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35; pointer-events: none;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--copper), transparent);
+            opacity: 0.5;
+        }
+
+        .page-header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+        }
+
+        .header-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--copper-lt);
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-kicker::after {
+            content: '';
+            width: 44px; height: 1px;
+            background: var(--copper);
+            opacity: 0.45;
+        }
+
+        .page-header h1 {
+            color: var(--paper);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: rgba(255,255,255,0.42);
+            font-size: 0.93rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .calc-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem 5rem;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* ── PANEL SHARED ── */
+        .panel {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+
+        .panel-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .panel-title i { color: var(--copper); font-size: 1rem; }
+
+        /* ── ASSET TABS ── */
+        .asset-tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.45rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .asset-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.7rem 0.25rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 0.04em;
+            font-weight: 500;
+            color: var(--muted);
+            background: var(--parchment);
+            transition: var(--ease);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .asset-tab i { font-size: 1.1rem; }
+
+        .asset-tab:hover { border-color: var(--copper); color: var(--copper); background: var(--copper-bg); }
+
+        .asset-tab.active { border-color: var(--copper); color: var(--copper); background: var(--copper-bg); }
+
+        /* ── FORM ELEMENTS ── */
+        .form-group { margin-bottom: 1.25rem; }
+
+        .form-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-label .hint {
+            font-size: 0.6rem;
+            color: var(--muted-lt);
+            letter-spacing: 0.03em;
+            text-transform: none;
+        }
+
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-prefix, .input-suffix {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .input-prefix { left: 0.75rem; }
+        .input-suffix { right: 0.75rem; }
+
+        .input-wrap input[type="number"],
+        .input-wrap select {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.92rem;
+            color: var(--text);
+            background: var(--parchment);
+            transition: var(--ease);
+            -moz-appearance: textfield;
+        }
+
+        .input-wrap input::-webkit-outer-spin-button,
+        .input-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+        .input-wrap.has-prefix input { padding-left: 1.75rem; }
+        .input-wrap.has-suffix input { padding-right: 2.4rem; }
+
+        .input-wrap input:focus,
+        .input-wrap select:focus {
+            outline: none;
+            border-color: var(--copper);
+            background: var(--paper);
+            box-shadow: 0 0 0 3px rgba(181,101,29,0.12);
+        }
+
+        /* range slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--border);
+            outline: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: var(--copper);
+            box-shadow: 0 1px 4px rgba(181,101,29,0.35);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: var(--copper);
+            border: none;
+        }
+
+        .slider-row { display: flex; gap: 0.75rem; align-items: center; }
+        .slider-row input[type="range"] { flex: 1; }
+
+        .slider-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--copper);
+            min-width: 3.5rem;
+            text-align: right;
+        }
+
+        /* toggle */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.05em;
+            color: var(--text-mid);
+        }
+
+        .toggle { position: relative; width: 40px; height: 20px; flex-shrink: 0; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+
+        .toggle-slider {
+            position: absolute; inset: 0;
+            background: var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .toggle-slider:before {
+            content: '';
+            position: absolute;
+            width: 14px; height: 14px;
+            left: 3px; top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.25s;
+        }
+
+        .toggle input:checked + .toggle-slider { background: var(--copper); }
+        .toggle input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+        /* calculate button */
+        .btn-calculate {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--ink);
+            color: var(--paper);
+            border: none;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--ease);
+            margin-top: 0.75rem;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-calculate:hover { background: var(--ink-mid); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,27,42,0.2); }
+
+        /* ── RESULTS ── */
+        .results-panel { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        /* placeholder */
+        .placeholder-state {
+            background: var(--paper);
+            border: 1.5px dashed var(--border-mid);
+            border-radius: 10px;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .placeholder-state i {
+            font-size: 2.5rem;
+            color: var(--border-mid);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .placeholder-state p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--muted);
+        }
+
+        /* summary cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .summary-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--copper);
+            border-radius: 8px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .summary-card.positive { border-top-color: #4A7C59; }
+        .summary-card.neutral  { border-top-color: #7A4F3A; }
+        .summary-card.purple   { border-top-color: #6B4FA0; grid-column: span 3; }
+
+        .s-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .s-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .s-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--muted-lt);
+            margin-top: 0.35rem;
+            letter-spacing: 0.03em;
+        }
+
+        .s-gain { color: #4A7C59; }
+
+        /* chart panel */
+        .chart-panel {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.75rem 2rem;
+        }
+
+        .chart-panel h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chart-panel h3 i { color: var(--copper); }
+
+        .chart-container { position: relative; height: 280px; }
+        canvas { width: 100% !important; }
+
+        .chart-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-mid);
+            letter-spacing: 0.04em;
+        }
+
+        .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+        /* table panel */
+        .table-panel {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.75rem 2rem;
+        }
+
+        .table-panel h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-panel h3 i { color: var(--copper); }
+
+        .table-scroll { overflow-x: auto; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+
+        thead th {
+            background: var(--ink);
+            color: rgba(255,255,255,0.7);
+            padding: 0.6rem 0.9rem;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        thead th:first-child { text-align: left; border-radius: 6px 0 0 0; }
+        thead th:last-child  { border-radius: 0 6px 0 0; }
+
+        tbody tr:nth-child(even) { background: var(--parchment); }
+
+        tbody td {
+            padding: 0.55rem 0.9rem;
+            text-align: right;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.83rem;
+            color: var(--text-mid);
+        }
+
+        tbody td:first-child {
+            text-align: left;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--ink);
+            letter-spacing: 0.04em;
+        }
+
+        .gain { color: #4A7C59; font-weight: 600; }
+
+        /* disclaimer */
+        .disclaimer {
+            background: var(--copper-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--copper);
+            border-radius: 0 6px 6px 0;
+            padding: 1rem 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+            margin-top: 2rem;
+        }
+
+        .disclaimer strong { color: var(--ink); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.28);
+            text-align: center;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .calc-grid { grid-template-columns: 1fr; }
+            .summary-cards { grid-template-columns: 1fr 1fr; }
+            .summary-card.purple { grid-column: span 2; }
+        }
+
+        @media (max-width: 640px) {
+            .page-header h1 { font-size: 2rem; }
+            .nav-inner { padding: 0.7rem 1.25rem; height: auto; flex-wrap: wrap; gap: 0.5rem; }
+            nav ul li a { font-size: 0.72rem; padding: 0.38rem 0.6rem; }
+            .calc-wrap { padding: 1.5rem 1.25rem 4rem; }
+            .page-header-inner { padding: 0 1.25rem; }
+            .asset-tabs { grid-template-columns: repeat(3, 1fr); }
+            .summary-cards { grid-template-columns: 1fr; }
+            .summary-card.purple { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Daniel King<span></span></a>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="knowledge-garden.html">Ideas</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <p class="header-kicker"><i class="fas fa-calculator"></i> Tool</p>
+            <h1>Investment Portfolio Calculator</h1>
+            <p>Project the future value of your portfolio across stocks, bonds, real estate, crypto, and savings — with inflation adjustment and capital gains tax.</p>
+        </div>
+    </div>
+
+    <div class="calc-wrap">
+        <div class="calc-grid">
+
+            <!-- ── INPUTS ── -->
+            <div class="panel">
+                <h2 class="panel-title"><i class="fas fa-sliders-h"></i> Parameters</h2>
+
+                <div class="asset-tabs">
+                    <button class="asset-tab active" data-asset="stocks" onclick="setAsset('stocks',this)">
+                        <i class="fas fa-chart-line"></i>Stocks / ETFs
+                    </button>
+                    <button class="asset-tab" data-asset="bonds" onclick="setAsset('bonds',this)">
+                        <i class="fas fa-file-invoice-dollar"></i>Bonds
+                    </button>
+                    <button class="asset-tab" data-asset="realestate" onclick="setAsset('realestate',this)">
+                        <i class="fas fa-home"></i>Real Estate
+                    </button>
+                    <button class="asset-tab" data-asset="crypto" onclick="setAsset('crypto',this)">
+                        <i class="fab fa-bitcoin"></i>Crypto
+                    </button>
+                    <button class="asset-tab" data-asset="savings" onclick="setAsset('savings',this)">
+                        <i class="fas fa-piggy-bank"></i>Savings
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Initial Investment <span class="hint">Lump sum today</span></div>
+                    <div class="input-wrap has-prefix">
+                        <span class="input-prefix">£</span>
+                        <input type="number" id="initial" value="10000" min="0" step="500" onchange="liveUpdate()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Monthly Contribution <span class="hint">Regular top-up</span></div>
+                    <div class="input-wrap has-prefix">
+                        <span class="input-prefix">£</span>
+                        <input type="number" id="monthly" value="200" min="0" step="50" onchange="liveUpdate()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Expected Annual Return <span class="hint" id="return-hint">Stocks: ~7–10% historical</span></div>
+                    <div class="slider-row">
+                        <input type="range" id="return-slider" min="0" max="50" step="0.5" value="8"
+                               oninput="syncSlider('return','%'); liveUpdate()">
+                        <span class="slider-value" id="return-val">8.0%</span>
+                    </div>
+                    <div class="input-wrap has-suffix" style="margin-top:0.5rem;">
+                        <input type="number" id="return" value="8" min="0" max="50" step="0.5"
+                               oninput="syncInput('return'); liveUpdate()">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Investment Period</div>
+                    <div class="slider-row">
+                        <input type="range" id="years-slider" min="1" max="50" step="1" value="20"
+                               oninput="syncSlider('years','yr'); liveUpdate()">
+                        <span class="slider-value" id="years-val">20 yr</span>
+                    </div>
+                    <div class="input-wrap has-suffix" style="margin-top:0.5rem;">
+                        <input type="number" id="years" value="20" min="1" max="50" step="1"
+                               oninput="syncInput('years'); liveUpdate()">
+                        <span class="input-suffix">yrs</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">Compounding Frequency</div>
+                    <div class="input-wrap">
+                        <select id="compound" onchange="liveUpdate()">
+                            <option value="12">Monthly</option>
+                            <option value="4">Quarterly</option>
+                            <option value="2">Semi-annually</option>
+                            <option value="1" selected>Annually</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="toggle-row">
+                    <span><i class="fas fa-chart-pie" style="color:var(--copper);margin-right:0.4rem;"></i>Adjust for Inflation (2.5% p.a.)</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="inflation" onchange="liveUpdate()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <span><i class="fas fa-percent" style="color:var(--copper);margin-right:0.4rem;"></i>Include Capital Gains Tax (20%)</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="cgt" onchange="liveUpdate()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <button class="btn-calculate" onclick="calculate()">
+                    <i class="fas fa-calculator"></i> Calculate Portfolio Value
+                </button>
+            </div>
+
+            <!-- ── RESULTS ── -->
+            <div class="results-panel" id="results-panel">
+                <div class="placeholder-state">
+                    <i class="fas fa-chart-area"></i>
+                    <p>Set your parameters and click <em>Calculate</em> to project your portfolio value.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="disclaimer">
+            <strong>⚠ Disclaimer:</strong> This calculator is for <strong>illustrative and educational purposes only</strong> and does not constitute financial advice. Returns shown are hypothetical and based on constant growth rates — actual investment returns vary and are not guaranteed. Past performance is not indicative of future results. Please consult a qualified financial adviser for personal financial planning.
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Daniel King &nbsp;·&nbsp; All rights reserved</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script>
+        const ASSETS = {
+            stocks:     { label:'Stocks / ETFs', return:8,    color:'#2D6A9F', hint:'Stocks: ~7–10% historical (S&P 500)' },
+            bonds:      { label:'Bonds',         return:3.5,  color:'#4A7C59', hint:'Bonds: ~2–5% typical yield' },
+            realestate: { label:'Real Estate',   return:6,    color:'#B5651D', hint:'Real estate: ~5–8% total return' },
+            crypto:     { label:'Crypto',        return:20,   color:'#6B4FA0', hint:'Crypto: highly volatile, past highs ~20–50%' },
+            savings:    { label:'Savings',       return:4.5,  color:'#7A4F3A', hint:'Savings: ~3–5% high-yield accounts (2024)' },
+        };
+
+        let currentAsset = 'stocks';
+        let chartInstance = null;
+
+        function setAsset(asset, el) {
+            currentAsset = asset;
+            document.querySelectorAll('.asset-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            const p = ASSETS[asset];
+            document.getElementById('return').value = p.return;
+            document.getElementById('return-slider').value = p.return;
+            document.getElementById('return-val').textContent = p.return.toFixed(1) + '%';
+            document.getElementById('return-hint').textContent = p.hint;
+            liveUpdate();
+        }
+
+        function syncSlider(id, unit) {
+            const v = parseFloat(document.getElementById(id+'-slider').value);
+            document.getElementById(id).value = v;
+            document.getElementById(id+'-val').textContent = v.toFixed(unit==='%'?1:0)+(unit==='%'?'%':' yr');
+        }
+
+        function syncInput(id) {
+            const v = parseFloat(document.getElementById(id).value)||0;
+            document.getElementById(id+'-slider').value = v;
+            document.getElementById(id+'-val').textContent = v.toFixed(id==='return'?1:0)+(id==='return'?'%':' yr');
+        }
+
+        function fmt(n) {
+            if(n>=1e6) return '£'+(n/1e6).toFixed(2)+'M';
+            if(n>=1e3) return '£'+(n/1e3).toFixed(1)+'k';
+            return '£'+n.toFixed(0);
+        }
+        function fmtFull(n) { return '£'+Math.round(n).toLocaleString('en-GB'); }
+
+        function calculate() {
+            const initial  = parseFloat(document.getElementById('initial').value)||0;
+            const monthly  = parseFloat(document.getElementById('monthly').value)||0;
+            const rate     = parseFloat(document.getElementById('return').value)||0;
+            const years    = parseInt(document.getElementById('years').value)||1;
+            const compound = parseInt(document.getElementById('compound').value)||1;
+            const inflation= document.getElementById('inflation').checked;
+            const cgt      = document.getElementById('cgt').checked;
+            const INFL=2.5, CGT=0.20;
+
+            const yearlyData=[], r=rate/100/compound;
+            let value=initial;
+            for(let y=1;y<=years;y++){
+                for(let p=0;p<compound;p++){ value*=(1+r); value+=monthly*(12/compound); }
+                yearlyData.push(value);
+            }
+
+            const totalContrib=initial+monthly*12*years;
+            let finalValue=yearlyData[years-1];
+            if(cgt){ const gain=Math.max(0,finalValue-totalContrib); finalValue=totalContrib+gain*(1-CGT); }
+            let realValue=finalValue;
+            if(inflation) realValue=finalValue/Math.pow(1+INFL/100,years);
+
+            const realYearly=yearlyData.map((v,i)=>{
+                let adj=v;
+                if(cgt){ const gain=Math.max(0,adj-totalContrib); adj=totalContrib+gain*(1-CGT); }
+                if(inflation) adj=adj/Math.pow(1+INFL/100,i+1);
+                return adj;
+            });
+            const contribYearly=Array.from({length:years},(_,i)=>initial+monthly*12*(i+1));
+
+            renderResults({yearlyData,realYearly,contribYearly,finalValue,realValue,totalContrib,years,inflation,cgt});
+        }
+
+        function renderResults(d) {
+            const panel=document.getElementById('results-panel');
+            const ac=ASSETS[currentAsset].color;
+            const gain=d.finalValue-d.totalContrib;
+            const gainPct=((gain/d.totalContrib)*100).toFixed(1);
+
+            panel.innerHTML=`
+              <div class="summary-cards">
+                <div class="summary-card positive">
+                  <div class="s-label">Projected Value</div>
+                  <div class="s-value">${fmt(d.finalValue)}</div>
+                  <div class="s-sub">${fmtFull(d.finalValue)}${d.inflation?' (nominal)':''}</div>
+                </div>
+                <div class="summary-card neutral">
+                  <div class="s-label">Total Invested</div>
+                  <div class="s-value">${fmt(d.totalContrib)}</div>
+                  <div class="s-sub">${fmtFull(d.totalContrib)}</div>
+                </div>
+                <div class="summary-card">
+                  <div class="s-label">Total Growth</div>
+                  <div class="s-value s-gain">+${fmt(gain)}</div>
+                  <div class="s-sub">+${gainPct}% on invested capital</div>
+                </div>
+                ${d.inflation?`
+                <div class="summary-card purple">
+                  <div class="s-label">Real Value — inflation-adjusted at 2.5% p.a.</div>
+                  <div class="s-value" style="color:#6B4FA0;">${fmtFull(d.realValue)}</div>
+                  <div class="s-sub">Purchasing power in today's money after ${d.years} years</div>
+                </div>`:''}
+              </div>
+
+              <div class="chart-panel">
+                <h3><i class="fas fa-chart-area"></i>Portfolio Growth Over ${d.years} Years</h3>
+                <div class="chart-container"><canvas id="growthChart"></canvas></div>
+                <div class="chart-legend">
+                  <div class="legend-item"><div class="legend-dot" style="background:${ac};"></div>Portfolio Value</div>
+                  <div class="legend-item"><div class="legend-dot" style="background:var(--border-mid);"></div>Total Contributed</div>
+                  ${d.inflation?'<div class="legend-item"><div class="legend-dot" style="background:#6B4FA0;"></div>Real Value</div>':''}
+                </div>
+              </div>
+
+              <div class="table-panel">
+                <h3><i class="fas fa-table"></i>Year-by-Year Breakdown</h3>
+                <div class="table-scroll">
+                  <table>
+                    <thead><tr><th>Year</th><th>Portfolio Value</th><th>Total Invested</th><th>Total Growth</th><th>Growth %</th></tr></thead>
+                    <tbody id="year-table-body"></tbody>
+                  </table>
+                </div>
+              </div>`;
+
+            const labels=Array.from({length:d.years},(_,i)=>`Yr ${i+1}`);
+            const datasets=[
+                { label:'Portfolio Value', data:d.realYearly, borderColor:ac, backgroundColor:ac+'22', fill:true, tension:0.35, pointRadius:d.years<=20?3:0, pointHoverRadius:5, borderWidth:2.5 },
+                { label:'Total Contributed', data:d.contribYearly, borderColor:'rgba(200,191,179,0.8)', backgroundColor:'rgba(200,191,179,0.12)', fill:true, tension:0.1, pointRadius:0, borderWidth:1.5, borderDash:[5,3] },
+            ];
+
+            if(chartInstance) chartInstance.destroy();
+            const ctx=document.getElementById('growthChart').getContext('2d');
+            chartInstance=new Chart(ctx,{
+                type:'line', data:{labels,datasets},
+                options:{
+                    responsive:true, maintainAspectRatio:false,
+                    interaction:{mode:'index',intersect:false},
+                    plugins:{
+                        legend:{display:false},
+                        tooltip:{
+                            callbacks:{label:c=>` ${c.dataset.label}: ${fmtFull(c.parsed.y)}`},
+                            backgroundColor:'#0D1B2A', titleColor:'rgba(255,255,255,0.8)',
+                            bodyColor:'rgba(255,255,255,0.55)', padding:10, cornerRadius:6,
+                        }
+                    },
+                    scales:{
+                        x:{ grid:{display:false}, ticks:{font:{size:10,family:'JetBrains Mono'},color:'#8A7E74',maxTicksLimit:10} },
+                        y:{ grid:{color:'rgba(226,217,207,0.5)'}, ticks:{font:{size:10,family:'JetBrains Mono'},color:'#8A7E74',callback:v=>fmt(v)} }
+                    }
+                }
+            });
+
+            const tbody=document.getElementById('year-table-body');
+            const step=d.years<=20?1:5;
+            let rows='';
+            for(let i=step-1;i<d.years;i+=step){
+                const pv=d.realYearly[i], tc=d.contribYearly[i], gr=pv-tc, grPct=((gr/tc)*100).toFixed(1);
+                rows+=`<tr><td>Year ${i+1}</td><td>${fmtFull(pv)}</td><td>${fmtFull(tc)}</td><td class="gain">+${fmtFull(Math.max(0,gr))}</td><td class="gain">+${grPct}%</td></tr>`;
+            }
+            tbody.innerHTML=rows;
+        }
+
+        function liveUpdate() { if(document.getElementById('growthChart')) calculate(); }
+
+        // init
+        document.getElementById('return').value = ASSETS.stocks.return;
+        document.getElementById('return-slider').value = ASSETS.stocks.return;
+    </script>
+</body>
+</html>

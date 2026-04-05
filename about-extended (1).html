@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Daniel King - Extended">
+    <meta name="author" content="Daniel King">
+    <title>About Daniel King | Daniel King</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink:        #0D1B2A;
+            --ink-mid:    #1E3448;
+            --copper:     #B5651D;
+            --copper-lt:  #D4844A;
+            --copper-bg:  #FDF0E6;
+            --parchment:  #F8F4EF;
+            --paper:      #FDFAF7;
+            --paper-2:    #F2EDE6;
+            --border:     #E2D9CF;
+            --border-mid: #C8BFB3;
+            --muted:      #8A7E74;
+            --muted-lt:   #B0A499;
+            --text:       #2A1F18;
+            --text-mid:   #4A3F36;
+            --ease:       all 0.22s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--parchment);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        a { color: var(--copper); text-decoration: none; transition: var(--ease); }
+        a:hover { color: var(--copper-lt); }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--ink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 3.75rem;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: var(--paper);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background: var(--copper);
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+            position: relative; top: -2px;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 0.2rem; }
+
+        nav ul li a {
+            display: block;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.85rem;
+            border-radius: 4px;
+            transition: var(--ease);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover { color: white; background: rgba(255,255,255,0.07); }
+        nav ul li a.active { color: var(--copper-lt); background: rgba(181,101,29,0.12); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--ink);
+            padding: 4.5rem 0 3.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35; pointer-events: none;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--copper), transparent);
+            opacity: 0.5;
+        }
+
+        .page-header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+        }
+
+        .header-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--copper-lt);
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-kicker::after {
+            content: '';
+            width: 44px; height: 1px;
+            background: var(--copper);
+            opacity: 0.45;
+        }
+
+        .page-header h1 {
+            color: var(--paper);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.12;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-header h1 em { font-style: italic; color: var(--copper-lt); }
+
+        .page-header p {
+            color: rgba(255,255,255,0.42);
+            font-size: 0.93rem;
+            font-weight: 300;
+            max-width: 480px;
+        }
+
+        /* ── CONTENT WRAP ── */
+        .content-wrap {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3.5rem 2.5rem 6rem;
+        }
+
+        /* ── CONTENT SECTIONS ── */
+        .content-section {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--copper);
+            margin-bottom: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-kicker::after {
+            content: '';
+            width: 30px; height: 1px;
+            background: var(--copper);
+            opacity: 0.4;
+        }
+
+        .section-heading {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-heading em { font-style: italic; color: var(--copper); }
+
+        /* body text */
+        .body-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.95;
+            color: var(--text);
+            margin-bottom: 1.4rem;
+        }
+
+        .body-text:last-child { margin-bottom: 0; }
+
+        .body-text strong { font-weight: 600; color: var(--ink); }
+
+        .body-text a { color: var(--copper); font-weight: 400; }
+
+        /* quote block */
+        .quote-block {
+            background: var(--ink);
+            border-radius: 8px;
+            padding: 2.5rem 3rem;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-block::before {
+            content: '"';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 10rem;
+            color: rgba(255,255,255,0.04);
+            position: absolute;
+            top: -2rem; left: 1rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .quote-block p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.85);
+            position: relative;
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--copper-lt);
+            font-style: normal;
+        }
+
+        /* interests grid */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.75rem;
+        }
+
+        .interest-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--copper);
+            border-radius: 8px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: var(--ease);
+        }
+
+        .interest-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(181,101,29,0.1);
+        }
+
+        .interest-card i {
+            font-size: 2rem;
+            color: var(--copper);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .interest-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+        }
+
+        .interest-card p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* principles list */
+        .principles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .principle-item {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--copper);
+            border-radius: 0 6px 6px 0;
+            padding: 1.25rem 1.5rem;
+            transition: var(--ease);
+        }
+
+        .principle-item:hover {
+            background: var(--copper-bg);
+            box-shadow: 0 4px 16px rgba(181,101,29,0.07);
+        }
+
+        .principle-item h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+        }
+
+        .principle-item p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.98rem;
+            font-weight: 300;
+            color: var(--text-mid);
+            line-height: 1.7;
+        }
+
+        /* divider */
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--copper), transparent);
+            margin: 3.5rem 0;
+            border: none;
+        }
+
+        /* contact link */
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: var(--ink);
+            color: var(--paper);
+            padding: 0.85rem 1.75rem;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: var(--ease);
+            margin-top: 1.5rem;
+        }
+
+        .contact-link:hover {
+            background: var(--ink-mid);
+            color: var(--paper);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13,27,42,0.2);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.28);
+            text-align: center;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0.7rem 1.25rem; height: auto; flex-wrap: wrap; gap: 0.5rem; }
+            nav ul li a { font-size: 0.72rem; padding: 0.38rem 0.6rem; }
+            .page-header-inner { padding: 0 1.25rem; }
+            .content-wrap { padding: 2.5rem 1.25rem 5rem; }
+            .quote-block { padding: 2rem 1.75rem; }
+            .interests-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .interests-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Daniel King<span></span></a>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="knowledge-garden.html">Ideas</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <p class="header-kicker"><i class="fas fa-user"></i> About</p>
+            <h1>A deeper look into my<br><em>journey and philosophy</em></h1>
+            <p>Curiosity, autodidacticism, and the spaces between disciplines.</p>
+        </div>
+    </div>
+
+    <div class="content-wrap">
+
+        <!-- Who I Am -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-user-circle"></i> Who I am</p>
+            <h2 class="section-heading">First and foremost, curious</h2>
+
+            <p class="body-text">My journey through chemical engineering, teaching, and AI research has been driven not by a predetermined career path but by an insatiable desire to understand how things work — from molecular interactions in chemical processes to information flow in neural networks, from abstract mathematical structures to the nature of consciousness itself.</p>
+
+            <p class="body-text">As an autodidact, I've learned that the most profound insights often emerge at the boundaries between disciplines. Mathematics provides the language, engineering offers the constraints of reality, neuroscience reveals how nature solved certain problems, and philosophy asks whether we're even asking the right questions. My approach to learning is fundamentally interdisciplinary, seeking connections where others see only separation.</p>
+
+            <div class="quote-block">
+                <p>"The important thing is not to stop questioning. Curiosity has its own reason for existing."</p>
+                <cite>— Albert Einstein</cite>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Intellectual Interests -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-lightbulb"></i> Interests</p>
+            <h2 class="section-heading">Intellectual pursuits</h2>
+            <p class="body-text">My intellectual work spans a range of fields, unified by common themes: understanding complex systems, reasoning under uncertainty, and the nature of information.</p>
+
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Artificial Intelligence</h3>
+                    <p>How machines learn, reason, and potentially understand</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-infinity"></i>
+                    <h3>Mathematics</h3>
+                    <p>Probability theory, high-dimensional geometry, applied mathematics</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-atom"></i>
+                    <h3>Neuroscience</h3>
+                    <p>Neural coding, information theory, biological computation</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Chemical Engineering</h3>
+                    <p>Process dynamics, thermodynamics, sustainable technologies</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-microscope"></i>
+                    <h3>Physics</h3>
+                    <p>Statistical mechanics, quantum phenomena, emergent behaviour</p>
+                </div>
+                <div class="interest-card">
+                    <i class="fas fa-yin-yang"></i>
+                    <h3>Philosophy</h3>
+                    <p>Philosophy of mind, epistemology, ethics, philosophy of science</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Journey -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-road"></i> Journey</p>
+            <h2 class="section-heading">Anything but linear</h2>
+
+            <p class="body-text">I began with chemical engineering, drawn to the challenge of designing processes that transform matter at scale. My undergraduate and master's work at London South Bank University and Imperial College London provided rigorous technical training, but also revealed gaps — particularly around uncertainty, variability, and the limitations of deterministic models.</p>
+
+            <p class="body-text">This led me to probability theory and statistics, initially as tools for engineering but increasingly as fascinating subjects in their own right. How do we reason under uncertainty? How does randomness give rise to predictable patterns? These questions connect engineering, mathematics, and AI in ways I keep finding new angles on.</p>
+
+            <p class="body-text">Teaching became another dimension of my journey. Working with students — from those struggling with basic concepts to those pushing at the frontiers — taught me as much as formal education ever did. It forced me to clarify my own understanding and to appreciate that intelligence manifests in many forms.</p>
+
+            <p class="body-text">Co-founding <a href="https://queryous.ai/" target="_blank" rel="noopener noreferrer">Queryous</a> represented a synthesis: applying AI research to educational challenges, making powerful technologies accessible to those who need them most, and working collaboratively on problems that matter. It's an ongoing experiment in translating ideas into impact.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Research Philosophy -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-compass"></i> Philosophy</p>
+            <h2 class="section-heading">How I approach research</h2>
+
+            <div class="principles-list">
+                <div class="principle-item">
+                    <h4>Depth Over Breadth — But Both Matter</h4>
+                    <p>While I explore many fields, I believe in going deep enough to actually contribute rather than skimming surfaces. It's better to genuinely understand one difficult thing than to superficially know ten.</p>
+                </div>
+                <div class="principle-item">
+                    <h4>Rigour With Humility</h4>
+                    <p>Mathematical and scientific rigour matter — sloppy thinking leads to wrong conclusions. But so does intellectual humility. Our current theories are incomplete approximations, not final truths. The most interesting questions are often those we don't yet know how to formalise.</p>
+                </div>
+                <div class="principle-item">
+                    <h4>Theory Grounded in Reality</h4>
+                    <p>Abstract theory is beautiful, but it should ultimately connect to observable phenomena and practical problems. The best theories explain reality; the best applications leverage deep theory.</p>
+                </div>
+                <div class="principle-item">
+                    <h4>Interdisciplinary Synthesis</h4>
+                    <p>Many important problems require integrating insights from multiple fields. Chemical reactor optimisation might benefit from AI; understanding neural networks might benefit from neuroscience; both benefit from probability theory and information theory.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Life Beyond -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-heart"></i> Life</p>
+            <h2 class="section-heading">Beyond the desk</h2>
+
+            <p class="body-text">Physical activities like bouldering and Brazilian Jiu Jitsu provide different modes of problem-solving — reading rock faces or opponents, making split-second decisions under pressure, learning through direct physical feedback. These aren't merely recreation but alternative forms of intelligence and learning that feed back into how I think.</p>
+
+            <p class="body-text">Reading broadly — from technical papers to literature to philosophy — keeps my thinking fresh and prevents narrow specialisation. Attending seminars on diverse topics (philosophy of mind one week, quantum computing the next, political economy after that) exposes me to different ways of thinking and argumentation.</p>
+
+            <p class="body-text">Gaming and drawing, though "hobbies," are also creative outlets and sources of inspiration. Games involve complex systems with emergent behaviour; drawing requires translating three-dimensional space to two dimensions, engaging different cognitive faculties than mathematical or verbal reasoning.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Values -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-mountain"></i> Values</p>
+            <h2 class="section-heading">What I stand for</h2>
+
+            <div class="principles-list">
+                <div class="principle-item">
+                    <h4>Sustainability</h4>
+                    <p>As a chemical engineer, I'm acutely aware of humanity's impact on planetary systems. Developing sustainable technologies and processes isn't optional — it's existentially necessary.</p>
+                </div>
+                <div class="principle-item">
+                    <h4>Ethics &amp; Responsibility</h4>
+                    <p>Technology is never neutral. AI systems can amplify biases, deepen inequalities, or concentrate power. As researchers and developers, we have ethical obligations to consider impacts and advocate for responsible deployment.</p>
+                </div>
+                <div class="principle-item">
+                    <h4>Accessibility &amp; Democratisation</h4>
+                    <p>Knowledge and powerful tools shouldn't be the exclusive domain of elites. Making AI and advanced education accessible to smaller institutions, developing countries, and underserved communities is both ethically right and practically wise.</p>
+                </div>
+                <div class="principle-item">
+                    <h4>Intellectual Honesty</h4>
+                    <p>It's better to say "I don't know" than to pretend certainty. It's better to acknowledge the limitations of one's methods than to overstate conclusions. Science progresses through error correction, not through defending positions.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Looking Forward -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-rocket"></i> Looking forward</p>
+            <h2 class="section-heading">Where next?</h2>
+
+            <p class="body-text">The honest answer is: I don't know exactly, and I'm okay with that. Rigid plans often miss unexpected opportunities. But some directions feel genuinely generative right now: understanding how neural networks represent and process information; applying stochastic processes to real-world systems; using AI thoughtfully to make education more effective and accessible; and building bridges between fields that don't usually talk to each other.</p>
+
+            <p class="body-text">Ultimately, I hope to contribute to understanding — of intelligent systems, of complex processes, of how we learn and know. If along the way I can help others learn, solve practical problems, and make technologies more beneficial and accessible, even better.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Connect -->
+        <div class="content-section">
+            <p class="section-kicker"><i class="fas fa-handshake"></i> Connect</p>
+            <h2 class="section-heading">Let's talk</h2>
+            <p class="body-text">If you've read this far, you probably share some of my interests. I'm always happy to discuss ideas, explore collaborations, or simply have intellectually stimulating conversations — whether you're a student, researcher, educator, or curious mind.</p>
+            <a href="index.html#contact" class="contact-link">
+                <i class="fas fa-envelope"></i> Get in touch
+            </a>
+        </div>
+
+    </div><!-- /content-wrap -->
+
+    <footer>
+        <p>&copy; 2026 Daniel King &nbsp;·&nbsp; All rights reserved</p>
+    </footer>
+
+</body>
+</html>
